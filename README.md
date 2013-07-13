@@ -1,3 +1,8 @@
+=============================================================================================
+Forked by coperd <lhcwhu@gmail.com> in 2013-7-12
+There is only some small modifications to the original files
+=============================================================================================
+
 # The Ultimate vimrc
 
 Over the last 8 years I have used and tweaked Vim. This is my Ultimate vimrc.
