@@ -46,7 +46,54 @@
 " Sets how many lines of history VIM has to remember
 set history=700
 
+" Add my own settings
+set number "display the line number"
+let Tlist_Auto_Open=1 "always display the tag list"
+autocmd InsertLeave * se nocul "highlight current line
+autocmd InsertEnter * se cul   "highlight current line
+set cursorline
+set foldenable "enable folding
+set foldcolumn=3
+set foldlevel=3
+set foldmethod=manual
+" Use <space> to open/close the folds
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+map <F3> :tabnew .<CR>
+map <C-F3> \be
+" Set the C language autoindent
+set smartindent
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+
+" Using ctags
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+" Display .NFO files
+set encoding=utf-8
+set encoding=utf-8
+function! SetFileEncodings(encodings)
+    let b:myfileencodingsbak=&fileencodings
+    let &fileencodings=a:encodings
+endfunction
+function! RestoreFileEncodings()
+    let &fileencodings=b:myfileencodingsbak
+    unlet b:myfileencodingsbak
+endfunction
+
+au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
+au BufReadPost *.nfo call RestoreFileEncodings()
+
+noremap <f2> =a{
+syn on
+colo desert
+colo desert
+filetype indent on
+se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
+autocmd BufEnter * lcd %:p:h
+
 " Enable filetype plugins
+filetype on
 filetype plugin on
 filetype indent on
 
@@ -111,11 +158,16 @@ set incsearch
 " Don't redraw while executing macros (good performance config)
 set lazyredraw 
 
+" use vim's keyboard model
+set nocompatible
+
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch 
+" Show time of the match
+set matchtime=1
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -126,14 +178,16 @@ set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax on
+
+" remove the sound
+set noeb
 
 try
     colorscheme desert
@@ -152,6 +206,9 @@ endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+" Set language
+set langmenu=zh_CN.UTF-8
+set helplang=cn
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -183,7 +240,9 @@ set tabstop=4
 set lbr
 set tw=500
 
-set ai "Auto indent
+"set ai "Auto indent
+set autoindent
+set cindent
 set si "Smart indent
 set wrap "Wrap lines
 
@@ -205,8 +264,8 @@ map j gj
 map k gk
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+"map <space> /
+"map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
