@@ -62,7 +62,8 @@ map <F3> :tabnew .<CR>
 map <C-F3> \be
 " Set the C language autoindent
 set smartindent
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+" Set the ctags executable path, you can find it using "which ctags" command
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 
