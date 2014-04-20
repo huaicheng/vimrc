@@ -66,6 +66,7 @@ set smartindent
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
+set tags=/Users/coperd/git/linux/.tags
 
 " Using ctags
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -208,8 +209,8 @@ endif
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 " Set language
-set langmenu=zh_CN.UTF-8
-set helplang=cn
+set langmenu=en_US.UTF-8
+set helplang=en
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac

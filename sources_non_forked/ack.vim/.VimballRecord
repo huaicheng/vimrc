@@ -1,0 +1,1 @@
+DrawIt.vba: call delete('/Users/coperd/.vim_runtime/sources_non_forked/ack.vim/plugin/DrawItPlugin.vim')|call delete('/Users/coperd/.vim_runtime/sources_non_forked/ack.vim/plugin/cecutil.vim')|call delete('/Users/coperd/.vim_runtime/sources_non_forked/ack.vim/autoload/DrawIt.vim')|call delete('/Users/coperd/.vim_runtime/sources_non_forked/ack.vim/doc/DrawIt.txt')
