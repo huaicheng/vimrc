@@ -208,6 +208,7 @@ endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+set fileencodings=ucs-bom,utf-8,cp936,gbk,big5,latin1,euc-kr,euc-jp
 " Set language
 set langmenu=en_US.UTF-8
 set helplang=en
