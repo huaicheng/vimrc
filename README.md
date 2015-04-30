@@ -1,7 +1,8 @@
-=============================================================================================
+==============================================================================
 Forked by coperd <lhcwhu@gmail.com> in 2013-7-12
-Modifications are only made in .vim_runtime/vimrcs/basic.vim file currently, adding some of my own favourite vim settings.
-=============================================================================================
+Modifications are only made in .vim_runtime/vimrcs/basic.vim file currently, 
+adding some of my own favourite vim settings.
+==============================================================================
 
 The Ultimate vimrc of coperd [Modified from git@github.com:amix/vimrc.git]
 
