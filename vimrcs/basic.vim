@@ -47,6 +47,8 @@
 set history=700
 
 " Add my own settings
+" delete the warning sound
+set vb t_vb=
 set number "display the line number"
 let Tlist_Auto_Open=1 "always display the tag list"
 autocmd InsertLeave * se nocul "highlight current line
@@ -178,6 +180,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+autocmd! GUIEnter * set vb t_vb=
 
 " Add a bit extra margin to the left
 
