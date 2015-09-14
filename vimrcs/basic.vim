@@ -47,6 +47,22 @@
 set history=500
 
 " Add my own settings
+" use cscope inside vim
+if has('cscope')
+    set cscopetag cscopeverbose
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
+    endif
+    cnoreabbrev csa cs add
+    cnoreabbrev csf cs find
+    cnoreabbrev csk cs kill
+    cnoreabbrev csr cs reset
+    cnoreabbrev css cs show
+    cnoreabbrev csh cs help
+
+    command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif
+
 " delete the warning sound
 set vb t_vb=
 set number "display the line number"
@@ -65,10 +81,10 @@ map <C-F3> \be
 " Set the C language autoindent
 set smartindent
 " Set the ctags executable path, you can find it using "which ctags" command
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
-set tags=/Users/coperd/git/linux/.tags
+"set tags=/Users/coperd/git/linux/.tags
 
 " Using ctags
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
