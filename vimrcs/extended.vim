@@ -11,6 +11,7 @@
 " Set font according to system
 if has("mac") || has("macunix")
     "set gfn=Source\ Code\ Pro:h15,Menlo:h15
+    "set gfn=Monaco\ for\ Powerline\ Regular:h14
     set gfn=Monaco:h14
 elseif has("win16") || has("win32")
     set gfn=Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
@@ -35,7 +36,7 @@ set guioptions-=L
 " Colorscheme
 if has("gui_running")
     set background=dark
-    colorscheme peaksea
+    "colorscheme peaksea
 else
     "colorscheme desert
     let g:colors_name="desert"
