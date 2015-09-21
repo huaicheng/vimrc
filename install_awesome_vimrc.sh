@@ -1,5 +1,4 @@
-cd ~/.vim_runtime
-ln -s ~/.vim_runtime/.vim ~/.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo 'set runtimepath+=~/.vim_runtime
 
@@ -12,5 +11,7 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry' > ~/.vimrc
+
+vim +PluginInstall +qall
 
 echo "Installed the Ultimate Vim configuration successfully! Enjoy :-)"

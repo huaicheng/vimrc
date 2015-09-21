@@ -23,6 +23,7 @@
 "       http://amix.dk/vim/vimrc.txt
 "
 " Sections:
+"    -> Vundle 
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -36,8 +37,11 @@
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
+"    -> Vundle
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,12 +112,11 @@ noremap <f2> =a{
 syn on
 colo desert
 colo desert
-filetype indent on
 se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
 autocmd BufEnter * lcd %:p:h
 
 " Enable filetype plugins
-filetype on
+filetype off
 filetype plugin on
 filetype indent on
 
@@ -510,3 +513,31 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+
+"set nocompatible              " be iMproved, required
+"filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'taglist.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            
+filetype plugin indent on    
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line"

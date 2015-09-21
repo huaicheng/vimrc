@@ -1,4 +1,4 @@
-cd ~/.vim_runtime
-ln -s ~/.vim_runtime/.vim ~/.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cat ~/.vim_runtime/vimrcs/basic.vim > ~/.vimrc
+vim +PluginInstall +qall
 echo "Installed the Basic Vim configuration successfully! Enjoy :-)"
