@@ -37,12 +37,30 @@
 set history=500
 
 " Add my own settings
-" use cscope inside vim
+
+" use cscope inside vim, vim should be compiled with "--enable-cscope"
 if has('cscope')
-    set cscopetag cscopeverbose
+    " use both cscope and ctags for 'ctrl-]', ':ta', and 'vim -t'
+    "set cscopetag 
+
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order
+    "set csto=0
+
+    " add any cscope database in current directory
+    "if filereadable("cscope.out")
+    "    cs add cscope.out
+    " else add the database pointed to by environment variable
+    "elseif $CSCOPE_DB != ""
+    "    cs add $CSCOPE_DB
+    "endif
+    " show msg when any other cscope db added
+    "set cscopeverbose
+
     if has('quickfix')
         set cscopequickfix=s-,c-,d-,i-,t-,e-
     endif
+
     cnoreabbrev csa cs add
     cnoreabbrev csf cs find
     cnoreabbrev csk cs kill
@@ -50,7 +68,6 @@ if has('cscope')
     cnoreabbrev css cs show
     cnoreabbrev csh cs help
 
-    command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
 " delete the warning sound
@@ -99,7 +116,7 @@ syn on
 colo desert
 colo desert
 se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
-autocmd BufEnter * lcd %:p:h
+"autocmd BufEnter * lcd %:p:h
 
 " Enable filetype plugins
 filetype off

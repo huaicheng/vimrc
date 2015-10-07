@@ -1,25 +1,28 @@
-"======================================================
-" Vundle managed plugins
-"======================================================
+"==============================================================================
+"                         Vundle managed plugins
+"==============================================================================
 
-"set nocompatible              " be iMproved, required
-"filetype off                  " required
+"set nocompatible               " be iMproved, required
+"filetype off                   " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic' 
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'         " Fuzzy file, buffer, mru, tag, etc
 Plugin 'taglist.vim'
-Plugin 'mru.vim'
+"Plugin 'mru.vim'               " access to a list of recently opened files
+Plugin 'DrawIt'
 "Plugin 'peaksea'
-Plugin 'mattn/emmet-vim'
+"Plugin 'mattn/emmet-vim'       " for html/css dev
 "Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'     " git wrapper, **TO LEARN**
 Plugin 'tpope/vim-markdown'
+Plugin 'cscope_macros.vim'      " basic cscope settings & mapping
+"Plugin 'brookhong/cscope.vim'   " automatical cscope db management
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
