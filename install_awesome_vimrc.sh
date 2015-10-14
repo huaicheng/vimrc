@@ -1,3 +1,6 @@
+#!/bin/bash
+
+[[ -e ~/.vim/bundle/Vundle.vim ]] || mkdir -p ~/.vim/bundle/Vundle.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo 'set runtimepath+=~/.vim_runtime
