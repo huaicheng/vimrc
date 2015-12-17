@@ -20,7 +20,7 @@ Plugin 'DrawIt'
 "Plugin 'mattn/emmet-vim'       " for html/css dev
 "Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'     " git wrapper, **TO LEARN**
-Plugin 'tpope/vim-markdown'
+"Plugin 'tpope/vim-markdown'
 Plugin 'cscope_macros.vim'      " basic cscope settings & mapping
 "Plugin 'brookhong/cscope.vim'   " automatical cscope db management
 

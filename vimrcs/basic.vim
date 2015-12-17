@@ -37,6 +37,9 @@
 set history=500
 
 " Add my own settings
+" Add vim support for markdown, no longer needed since newests version of vim
+" already support .md as markdown file
+"au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown 
 
 " use cscope inside vim, vim should be compiled with "--enable-cscope"
 if has('cscope')
