@@ -12,17 +12,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic' 
 Plugin 'scrooloose/nerdtree'
-"Plugin 'kien/ctrlp.vim'         " Fuzzy file, buffer, mru, tag, etc
+"Plugin 'kien/ctrlp.vim'            " Fuzzy file, buffer, mru, tag, etc
 Plugin 'taglist.vim'
-"Plugin 'mru.vim'               " access to a list of recently opened files
+"Plugin 'mru.vim'                   " access to a list of recently opened files
 Plugin 'DrawIt'
 "Plugin 'peaksea'
-"Plugin 'mattn/emmet-vim'       " for html/css dev
+"Plugin 'mattn/emmet-vim'           " for html/css dev
 "Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'     " git wrapper, **TO LEARN**
-"Plugin 'tpope/vim-markdown'
-Plugin 'cscope_macros.vim'      " basic cscope settings & mapping
-"Plugin 'brookhong/cscope.vim'   " automatical cscope db management
+Plugin 'tpope/vim-fugitive'         " git wrapper, **TO LEARN**
+"Plugin 'tpope/vim-markdown'        " use native vim markdown feature now
+"Plugin 'brookhong/cscope.vim'      " automatic cscope db management, autoupdate cscope.out, **TO LEARN**
+Plugin 'cscope_macros.vim'          " basic cscope settings & mapping
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
