@@ -38,6 +38,12 @@ set history=500
 
 " Add my own settings
 
+" Comment the following to not have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " Add vim support for markdown, no longer needed since newests version of vim
 " already support .md as markdown file
 "au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown 
@@ -89,6 +95,11 @@ function! LoadCscope()
     endif
 endfunction
 au BufEnter /* call LoadCscope()
+
+" open the definition in a vertical split
+"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" open the definition in a new tab
+"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " delete the warning sound
 set vb t_vb=
