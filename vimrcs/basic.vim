@@ -4,15 +4,9 @@
 " Note that this repo is forked from amix's vimrc, but has been 
 " changed greatly.
 "
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/coperd/vimrc
+"       https://github.com/coperd/vimrc
 "
 " Sections:
-"    -> Vundle 
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -48,7 +42,7 @@ endif
 " already support .md as markdown file
 "au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown 
 
-" use cscope inside vim, vim should be compiled with "--enable-cscope"
+" Cscope settings, VIM should be compiled with "--enable-cscope"
 if has('cscope')
     "
     " The following commented lines are already included in cscope_maps.vim
@@ -84,7 +78,7 @@ if has('cscope')
 
 endif
 
-" cscope.out autoloading
+" Cscope.out autoloading
 function! LoadCscope()
     let db = findfile("cscope.out", ".;")
     if (!empty(db))
@@ -101,36 +95,45 @@ au BufEnter /* call LoadCscope()
 " open the definition in a new tab
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-" delete the warning sound
+" Delete warning sound
 set vb t_vb=
-set number "display the line number"
-let Tlist_Auto_Open=1 "always display the tag list"
-set foldenable "enable folding
+
+" Show line number
+set number 
+
+" Enable folding
+set foldenable 
 set foldcolumn=3
 set foldlevel=3
 set foldmethod=manual
+
 " Use <space> to open/close the folds
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 map <F3> :tabnew .<CR>
 map <C-F3> \be
+
 " Set the C language autoindent
 set smartindent
+
+" Always display the tag list
+let Tlist_Auto_Open=1 
+
 " Set the ctags executable path, you can find it using "which ctags" command
 let Tlist_Ctags_Cmd = 'ctags'
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
-"set tags=/Users/coperd/git/linux/.tags
 
 " Using ctags
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " Display .NFO files
 set encoding=utf-8
-set encoding=utf-8
+
 function! SetFileEncodings(encodings)
     let b:myfileencodingsbak=&fileencodings
     let &fileencodings=a:encodings
 endfunction
+
 function! RestoreFileEncodings()
     let &fileencodings=b:myfileencodingsbak
     unlet b:myfileencodingsbak
@@ -141,8 +144,8 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 
 noremap <f2> =a{
 syn on
-colo desert
-colo desert
+"colo desert
+"colo desert
 se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
 "autocmd BufEnter * lcd %:p:h
 
@@ -165,7 +168,6 @@ nmap <leader>w :w!<cr>
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -231,8 +233,10 @@ set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch 
+
 " Show time of the match
 set matchtime=1
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -256,6 +260,7 @@ syntax on
 set noeb
 
 try
+    set t_Co=256
     colorscheme desert
 catch
 endtry
@@ -284,14 +289,15 @@ set ffs=unix,dos,mac
 "autocmd InsertLeave * se nocul "highlight current line
 "autocmd InsertEnter * se cul   "highlight current line
 
-" highlight current line, must come after colorscheme
+" Highlight current line, must come after colorscheme
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=8
 
-" for regions with column > 80, set color to be light gray
+" For regions with column > 80, set color to be light gray
 set colorcolumn=80
 hi ColorColumn ctermbg=232
 let &colorcolumn=join(range(81,999),",")
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -495,8 +501,6 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
