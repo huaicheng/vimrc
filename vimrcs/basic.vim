@@ -105,9 +105,6 @@ au BufEnter /* call LoadCscope()
 set vb t_vb=
 set number "display the line number"
 let Tlist_Auto_Open=1 "always display the tag list"
-autocmd InsertLeave * se nocul "highlight current line
-autocmd InsertEnter * se cul   "highlight current line
-set cursorline
 set foldenable "enable folding
 set foldcolumn=3
 set foldlevel=3
@@ -283,6 +280,18 @@ set helplang=en
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" TO DELETE
+"autocmd InsertLeave * se nocul "highlight current line
+"autocmd InsertEnter * se cul   "highlight current line
+
+" highlight current line, must come after colorscheme
+set cursorline
+hi CursorLine term=bold cterm=bold ctermbg=8
+
+" for regions with column > 80, set color to be light gray
+set colorcolumn=80
+hi ColorColumn ctermbg=232
+let &colorcolumn=join(range(81,999),",")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
