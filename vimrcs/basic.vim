@@ -23,7 +23,7 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
+let g:indentLine_enabled = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,9 +97,6 @@ au BufEnter /* call LoadCscope()
 
 " Delete warning sound
 set vb t_vb=
-
-" Show line number
-set number 
 
 " Enable folding
 set foldenable 
@@ -293,11 +290,15 @@ set ffs=unix,dos,mac
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=8
 
+" Line number & color
+set number
+hi LineNr ctermbg=233 ctermfg=Darkgrey
+hi CursorLineNr term=bold cterm=bold ctermfg=Red
+
 " For regions with column > 80, set color to be light gray
 set colorcolumn=80
 hi ColorColumn ctermbg=232
 let &colorcolumn=join(range(81,999),",")
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
