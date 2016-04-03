@@ -286,6 +286,7 @@ set ffs=unix,dos,mac
 "autocmd InsertLeave * se nocul "highlight current line
 "autocmd InsertEnter * se cul   "highlight current line
 
+
 " Highlight current line, must come after colorscheme
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=8
@@ -296,9 +297,13 @@ hi LineNr ctermbg=233 ctermfg=Darkgrey
 hi CursorLineNr term=bold cterm=bold ctermfg=Red
 
 " For regions with column > 80, set color to be light gray
-set colorcolumn=80
+set textwidth=80
+" fo: t for auto line break after textwidth, a for auto adjust lines
+set formatoptions+=ta
+set colorcolumn=+1
 hi ColorColumn ctermbg=232
 let &colorcolumn=join(range(81,999),",")
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -324,7 +329,6 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
 
 "set ai "Auto indent
 set autoindent
