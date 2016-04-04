@@ -24,6 +24,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:indentLine_enabled = 1
+let g:tex_conceal = ""
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -299,7 +301,7 @@ hi CursorLineNr term=bold cterm=bold ctermfg=Red
 " For regions with column > 80, set color to be light gray
 set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
-set formatoptions+=ta
+set formatoptions+=t
 set colorcolumn=+1
 hi ColorColumn ctermbg=232
 let &colorcolumn=join(range(81,999),",")
@@ -322,8 +324,6 @@ set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
 
