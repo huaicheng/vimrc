@@ -25,6 +25,7 @@ Plugin 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels 
 Plugin 'Yggdroot/indentLine'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
