@@ -116,6 +116,8 @@ set smartindent
 
 " Always display the tag list
 let Tlist_Auto_Open=1 
+" This taglist window width setting is only for Dell 22' monitor in my office
+let g:Tlist_WinWidth=19
 
 " Set the ctags executable path, you can find it using "which ctags" command
 let Tlist_Ctags_Cmd = 'ctags'
