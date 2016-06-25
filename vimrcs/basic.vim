@@ -101,7 +101,7 @@ au BufEnter /* call LoadCscope()
 set vb t_vb=
 
 " solve mutt's line-break problem
-set text_flowed=yes
+setlocal fo+=aw
 
 " Enable folding
 set foldenable 
