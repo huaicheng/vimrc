@@ -100,6 +100,9 @@ au BufEnter /* call LoadCscope()
 " Delete warning sound
 set vb t_vb=
 
+" solve mutt's line-break problem
+set text_flowed=yes
+
 " Enable folding
 set foldenable 
 set foldcolumn=3
