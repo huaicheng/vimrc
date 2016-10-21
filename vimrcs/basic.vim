@@ -278,6 +278,7 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     set t_Co=256
+    set guifont=Monaco:h14
     set guitablabel=%M\ %t
 endif
 
@@ -298,7 +299,7 @@ set ffs=unix,dos,mac
 
 " Highlight current line, must come after colorscheme
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=8
+hi CursorLine term=bold cterm=bold ctermbg=10
 
 " Line number & color
 set number
