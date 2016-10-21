@@ -265,7 +265,9 @@ set noeb
 
 try
     set t_Co=256
-    colorscheme desert
+    syntax enable
+    set background=dark " mode: dark, light
+    colorscheme solarized
 catch
 endtry
 

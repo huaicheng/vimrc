@@ -19,13 +19,14 @@ Plugin 'DrawIt'
 "Plugin 'peaksea'
 "Plugin 'mattn/emmet-vim'                   " for html/css dev
 "Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
+"Plugin 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
 "Plugin 'tpope/vim-markdown'                " use native vim markdown feature now
 "Plugin 'brookhong/cscope.vim'              " automatic cscope db management, autoupdate cscope.out, **TO LEARN**
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels 
 Plugin 'Yggdroot/indentLine'
 Plugin 'lervag/vimtex'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
