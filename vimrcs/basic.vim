@@ -424,6 +424,8 @@ set laststatus=2
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L
 
+" Don't hide format controlling characters
+set conceallevel=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
