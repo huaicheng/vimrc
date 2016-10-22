@@ -303,7 +303,7 @@ hi CursorLine term=bold cterm=bold ctermbg=Black
 
 " Line number & color
 set number
-hi LineNr ctermbg=233 ctermfg=Darkgrey
+hi LineNr ctermbg=Black ctermfg=Darkgrey
 hi CursorLineNr term=bold cterm=bold ctermfg=White
 
 " For regions with column > 80, set color to be light gray
@@ -311,8 +311,8 @@ set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=+1
-hi ColorColumn ctermbg=232
-let &colorcolumn=join(range(81,999),",")
+"hi ColorColumn ctermbg=232
+"let &colorcolumn=join(range(81,999),",")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
