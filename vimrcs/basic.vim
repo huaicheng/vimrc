@@ -171,7 +171,7 @@ nmap <leader>w :w!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -275,12 +275,25 @@ set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
+    set guioptions-=m                               " hide menu bar
+    set guioptions-=r                               " hide scrollbar
+    set guioptions-=T                               " hide toolbar
     set guioptions-=e
+
     set t_Co=256
-    set guifont=Monaco:h14
-    set guitablabel=%M\ %t
+    " set cursor color
+    highlight Cursor guifg=Black guibg=Green
+
+    if has("gui_gtk2")                              " for Linux
+        set guifont=Monaco\ 12
+    elseif has("gui_macvim")                        " for MacVim
+        set guifont=Monaco:h14
+        set guitablabel=%M\ %t
+    elseif has("gui_win32")                         " for Windows
+        set guifont=Consolas:h11:cANSI
+    endif
 endif
+
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
