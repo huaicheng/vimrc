@@ -140,6 +140,20 @@ nmap <F8> :TagbarToggle<CR>
 " Using ctags
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
+" YCM settings
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_commments_and_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_comp0letion = ['<c-p>', '<Up>']
+let g:ycm_complete_in_strings = 1
+let g:ycm_show_disgnostics_ui = 0
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
+nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+
+
 " Display .NFO files
 set encoding=utf-8
 

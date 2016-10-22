@@ -28,6 +28,8 @@ Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 Plugin 'Yggdroot/indentLine'
 Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
