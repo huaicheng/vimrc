@@ -13,7 +13,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic' 
 Plugin 'scrooloose/nerdtree'
 "Plugin 'kien/ctrlp.vim'                    " Fuzzy file, buffer, mru, tag, etc
-Plugin 'taglist.vim'
+"Plugin 'taglist.vim'
+Plugin 'majutsushi/tagbar'
 "Plugin 'mru.vim'                           " access to a list of recently opened files
 Plugin 'DrawIt'
 "Plugin 'peaksea'

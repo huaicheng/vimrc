@@ -118,17 +118,27 @@ map <C-F3> \be
 set smartindent
 
 " Always display the tag list
-let Tlist_Auto_Open=1 
+"let Tlist_Auto_Open=1 
 " This taglist window width setting is only for Dell 22' monitor in my office
-let g:Tlist_WinWidth=19
+"let g:Tlist_WinWidth=19
 
 " Set the ctags executable path, you can find it using "which ctags" command
-let Tlist_Ctags_Cmd = 'ctags'
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
+"let Tlist_Ctags_Cmd = 'ctags'
+"let Tlist_Show_One_File = 1
+"let Tlist_Exit_OnlyWindow = 1
+
+let g:tagbar_ctags_bin = 'ctags'
+let g:tagbar_left = 1
+let g:tagbar_width = 19
+"let g:tagbar_autoclose=1
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_indent = 1
+"let g:tagbar_autofocus = 1
+autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
+nmap <F8> :TagbarToggle<CR>
 
 " Using ctags
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " Display .NFO files
 set encoding=utf-8
