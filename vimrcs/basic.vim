@@ -430,13 +430,13 @@ set laststatus=2
 "set statusline=
 set statusline=
 set statusline+=%7*\[%n]                                  "buffernr
-set statusline+=%1*\ %<%F\                                "File+path
+set statusline+=%1*\ %<%f\                                "File+path
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
 set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-set statusline+=%8*\ %=\ LN:%l/%L\ (%p%%)\             "Rownumber/total (%)
-set statusline+=%9*\ COL:%c\                            "Colnr
+set statusline+=%8*\ %=\ LN:%04l/%L\ (%03p%%)\            "Rownumber/total (%)
+set statusline+=%9*\ COL:%03c\                            "Colnr
 
 hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
 hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
