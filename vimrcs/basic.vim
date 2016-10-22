@@ -299,12 +299,12 @@ set ffs=unix,dos,mac
 
 " Highlight current line, must come after colorscheme
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=10
+hi CursorLine term=bold cterm=bold ctermbg=Black
 
 " Line number & color
 set number
 hi LineNr ctermbg=233 ctermfg=Darkgrey
-hi CursorLineNr term=bold cterm=bold ctermfg=Red
+hi CursorLineNr term=bold cterm=bold ctermfg=White
 
 " For regions with column > 80, set color to be light gray
 set textwidth=80
