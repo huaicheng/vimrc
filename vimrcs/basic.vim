@@ -1,8 +1,7 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
-"       Huaicheng Li
-" Note that this repo is forked from amix's vimrc, but has been 
-" changed greatly.
+"       Huaicheng Li <lhcwhu@gmail.com>
+" Note that this repo is forked from amix's vimrc, but has been changed greatly.
 "
 "       https://github.com/huaicheng/vimrc
 "
@@ -21,63 +20,41 @@
 "    -> Misc
 "    -> Helper functions
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:indentLine_enabled = 1
-let g:tex_conceal = ""
+let g:tex_conceal = 0
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=500
 
 " Add my own settings
 
-" Comment the following to not have Vim jump to the last position when
-" reopening a file
+" Remember last position when exited
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-" Add vim support for markdown, no longer needed since newests version of vim
-" already support .md as markdown file
-"au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown 
+" Remember info about open buffers on close
+set viminfo^=%
 
 " Cscope settings, VIM should be compiled with "--enable-cscope"
 if has('cscope')
-    "
-    " The following commented lines are already included in cscope_maps.vim
-    " If later use cscope.vim, this part may be needed again
-    "
     " use both cscope and ctags for 'ctrl-]', ':ta', and 'vim -t'
-    "set cscopetag 
-
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order
-    "set csto=0
-
-    " add any cscope database in current directory
-    "if filereadable("cscope.out")
-    "    cs add cscope.out
-    " else add the database pointed to by environment variable
-    "elseif $CSCOPE_DB != ""
-    "    cs add $CSCOPE_DB
-    "endif
-    " show msg when any other cscope db added
-    "set cscopeverbose
-
+    " set cscopetag 
     if has('quickfix')
         set cscopequickfix=s-,c-,d-,i-,t-,e-
     endif
-
     cnoreabbrev csa cs add
     cnoreabbrev csf cs find
     cnoreabbrev csk cs kill
     cnoreabbrev csr cs reset
     cnoreabbrev css cs show
     cnoreabbrev csh cs help
-
 endif
 
 " Cscope.out autoloading
@@ -85,22 +62,17 @@ function! LoadCscope()
     let db = findfile("cscope.out", ".;")
     if (!empty(db))
         let path = strpart(db, 0, match(db, "/cscope.out$"))
-        set nocscopeverbose " suppress 'duplicate connection' error
+        set nocscopeverbose             " suppress 'duplicate connection' error
         exe "cs add " . db . " " . path
         set cscopeverbose
     endif
 endfunction
 au BufEnter /* call LoadCscope()
 
-" open the definition in a vertical split
-"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-" open the definition in a new tab
-"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-
 " Delete warning sound
 set vb t_vb=
 
-" solve mutt's line-break problem
+" Solve mutt's line-break problem (:help formatoptions)
 setlocal fo+=aw
 
 " Enable folding
@@ -117,16 +89,7 @@ map <C-F3> \be
 " Set the C language autoindent
 set smartindent
 
-" Always display the tag list
-"let Tlist_Auto_Open=1 
-" This taglist window width setting is only for Dell 22' monitor in my office
-"let g:Tlist_WinWidth=19
-
-" Set the ctags executable path, you can find it using "which ctags" command
-"let Tlist_Ctags_Cmd = 'ctags'
-"let Tlist_Show_One_File = 1
-"let Tlist_Exit_OnlyWindow = 1
-
+" Tagbar settings
 let g:tagbar_ctags_bin = 'ctags'
 let g:tagbar_left = 1
 let g:tagbar_width = 19
@@ -134,11 +97,9 @@ let g:tagbar_width = 19
 let g:tagbar_show_linenumbers = 1
 let g:tagbar_indent = 1
 "let g:tagbar_autofocus = 1
-autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
+" Open tagbar for certain types of files
+autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
 nmap <F8> :TagbarToggle<CR>
-
-" Using ctags
-"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " YCM settings
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -155,8 +116,6 @@ nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 
 
 " Display .NFO files
-set encoding=utf-8
-
 function! SetFileEncodings(encodings)
     let b:myfileencodingsbak=&fileencodings
     let &fileencodings=a:encodings
@@ -171,7 +130,6 @@ au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
 noremap <f2> =a{
-syn on
 "colo desert
 "colo desert
 se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
@@ -203,13 +161,7 @@ command! W w !sudo tee % > /dev/null
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-" Turn on the WiLd menu
+" Turn on the wild menu
 set wildmenu
 
 " Ignore compiled files
@@ -224,7 +176,7 @@ endif
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -278,24 +230,23 @@ autocmd! GUIEnter * set vb t_vb=
 " Add a bit extra margin to the left
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax on
 
-" remove the sound
+" Remove error sound
 set noeb
 
+" Use solarized colorscheme
 try
     set t_Co=256
     syntax enable
-    set background=dark " mode: dark, light
+    set background=dark                             " mode: dark, light
     colorscheme solarized
 catch
 endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -308,7 +259,7 @@ if has("gui_running")
     " set cursor color
     highlight Cursor guifg=Black guibg=Green
 
-    if has("gui_gtk2")                              " for Linux
+    if has("gui_gtk2")                              " for GTK2 in Linux
         set guifont=Monaco\ 12
     elseif has("gui_macvim")                        " for MacVim
         set guifont=Monaco:h14
@@ -317,7 +268,6 @@ if has("gui_running")
         set guifont=Consolas:h11:cANSI
     endif
 endif
-
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -329,11 +279,6 @@ set helplang=en
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" TO DELETE
-"autocmd InsertLeave * se nocul "highlight current line
-"autocmd InsertEnter * se cul   "highlight current line
-
-
 " Highlight current line, must come after colorscheme
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=Black
@@ -343,30 +288,25 @@ set number
 hi LineNr ctermbg=Black ctermfg=Darkgrey
 hi CursorLineNr term=bold cterm=bold ctermfg=White
 
-" For regions with column > 80, set color to be light gray
+" Set 80 line marker
 set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=80
-"hi ColorColumn ctermbg=232
-"let &colorcolumn=join(range(81,999),",")
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Be smart when using tabs ;)
 set smarttab
 set shiftwidth=4
@@ -378,30 +318,22 @@ set lbr
 "set ai "Auto indent
 set autoindent
 set cindent
-set si "Smart indent
-set wrap "Wrap lines
+set si                      "Smart indent
+set wrap                    "Wrap lines
 
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Visual mode related
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-"map <space> /
-"map <c-space> ?
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -429,7 +361,6 @@ let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -444,27 +375,12 @@ try
 catch
 endtry
 
-" Return to last edit position when opening files (You want this!)
-" autocmd BufReadPost *
-"      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-"      \   exe "normal! g`\"" |
-"      \ endif
-" Remember info about open buffers on close
-" set viminfo^=%
 
-
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
-
-" Format the status line
-"let g:airline_section_b = '%{strftime("%c")}'
-"let g:airline_section_y = 'BN: %{bufnr("%")}'
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L\ Col:\ %c
-"set statusline=Type:%y\ \ \ Line:%l/%L\ (%p%%),%c " my own version
-"set statusline=
 set statusline=
 set statusline+=%7*\[%n]                                  "buffernr
 set statusline+=%1*\ %<%f\                                "File+path
@@ -490,9 +406,6 @@ set conceallevel=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -505,15 +418,6 @@ if has("mac") || has("macunix")
   vmap <D-j> <M-j>
   vmap <D-k> <M-k>
 endif
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -546,9 +450,9 @@ map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -559,9 +463,9 @@ map <leader>sa zg
 map <leader>s? z=
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -575,9 +479,9 @@ map <leader>x :e ~/buffer.md<cr>
 map <leader>pp :setlocal paste!<cr>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -634,4 +538,3 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
