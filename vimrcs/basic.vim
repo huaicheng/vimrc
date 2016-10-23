@@ -26,8 +26,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:indentLine_enabled = 1
 let g:tex_conceal = ""
 
 " Sets how many lines of history VIM has to remember

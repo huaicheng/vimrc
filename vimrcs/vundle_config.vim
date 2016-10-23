@@ -25,7 +25,7 @@ Plugin 'DrawIt'
 "Plugin 'brookhong/cscope.vim'              " automatic cscope db management, autoupdate cscope.out, **TO LEARN**
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels 
-Plugin 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
 Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
