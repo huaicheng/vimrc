@@ -26,6 +26,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+au BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+
 let g:tex_conceal = ""
 
 " Sets how many lines of history VIM has to remember
@@ -71,7 +74,11 @@ au BufEnter /* call LoadCscope()
 set vb t_vb=
 
 " Solve mutt's line-break problem (:help formatoptions)
-setlocal fo+=aw
+augroup mail_trailing_whitespace " {
+    autocmd!
+    autocmd FileType mail setlocal formatoptions+=w
+augroup END " }
+"setlocal fo+=aw
 
 " Enable folding
 set foldenable 
@@ -90,10 +97,12 @@ set smartindent
 " Tagbar settings
 let g:tagbar_ctags_bin = 'ctags'
 let g:tagbar_left = 1
-let g:tagbar_width = 19
+let g:tagbar_width = 15
 "let g:tagbar_autoclose=1
-let g:tagbar_show_linenumbers = 1
-let g:tagbar_indent = 1
+let g:tagbar_show_linenumbers = 0
+let g:tagbar_compact = 1
+let g:tagbar_show_visibility = 0
+let g:tagbar_indent = 0
 "let g:tagbar_autofocus = 1
 " Open tagbar for certain types of files
 autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
@@ -112,6 +121,26 @@ let g:ycm_show_disgnostics_ui = 0
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 
+" Markdown plugin settings
+let g:markdown_enable_spell_checking = 0
+let g:markdown_enable_input_abbreviations = 0
+" disable concealing for italic, bold, inline-code and link
+let g:markdown_enable_conceal = 0
+"let g:markdown_mapping_switch_status = '<Leader>s'
+
+" Tabular plugin settings
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
 
 " Display .NFO files
 function! SetFileEncodings(encodings)

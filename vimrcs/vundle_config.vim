@@ -22,6 +22,7 @@ Plugin 'DrawIt'
 "Plugin 'bling/vim-airline'
 "Plugin 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
 "Plugin 'tpope/vim-markdown'                " use native vim markdown feature now
+Plugin 'gabrielelana/vim-markdown'
 "Plugin 'brookhong/cscope.vim'              " automatic cscope db management, autoupdate cscope.out, **TO LEARN**
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels 
@@ -30,6 +31,8 @@ Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
+Plugin 'godlygeek/tabular'
+Plugin 'justinmk/vim-syntax-extra'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
