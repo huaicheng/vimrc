@@ -121,6 +121,15 @@ let g:ycm_show_disgnostics_ui = 0
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 
+" tmux related settings
+"let g:tmux_navigator_no_mappings = 1
+
+"nnoremap <silent> {c-h} :TmuxNavigateLeft<cr>
+"nnoremap <silent> {c-j} :TmuxNavigateDown<cr>
+"nnoremap <silent> {c-k} :TmuxNavigateUp<cr>
+"nnoremap <silent> {c-l} :TmuxNavigateRight<cr>
+"nnoremap <silent> {c-?} :TmuxNavigatePrevious<cr
+
 " Markdown plugin settings
 let g:markdown_enable_spell_checking = 0
 let g:markdown_enable_input_abbreviations = 0

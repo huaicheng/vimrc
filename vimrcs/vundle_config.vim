@@ -33,6 +33,7 @@ Plugin 'altercation/vim-colors-solarized'
 "Plugin 'rdnetto/YCM-Generator'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-syntax-extra'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
