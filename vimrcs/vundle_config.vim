@@ -11,12 +11,12 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic' 
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 "Plugin 'kien/ctrlp.vim'                    " Fuzzy file, buffer, mru, tag, etc
 "Plugin 'taglist.vim'
 Plugin 'majutsushi/tagbar'
 "Plugin 'mru.vim'                           " access to a list of recently opened files
-Plugin 'DrawIt'
+"Plugin 'DrawIt'
 "Plugin 'peaksea'
 "Plugin 'mattn/emmet-vim'                   " for html/css dev
 "Plugin 'bling/vim-airline'
@@ -27,10 +27,10 @@ Plugin 'gabrielelana/vim-markdown'
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels 
 "Plugin 'Yggdroot/indentLine'
-Plugin 'lervag/vimtex'
+"Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'rdnetto/YCM-Generator'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-syntax-extra'
 
