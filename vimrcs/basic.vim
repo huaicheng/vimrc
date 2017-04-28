@@ -276,6 +276,7 @@ syntax on
 set noeb
 
 " Use solarized colorscheme
+"let g:solarized_termcolors=256
 try
     set t_Co=256
     syntax enable
@@ -295,7 +296,7 @@ if has("gui_running")
     " set cursor color
     highlight Cursor guifg=Black guibg=Green
 
-    if has("gui_gtk2")                              " for GTK2 in Linux
+    if has("gui_gtk")                              " for GTK2 in Linux
         set guifont=Monaco\ 12
     elseif has("gui_macvim")                        " for MacVim
         set guifont=Monaco:h14
