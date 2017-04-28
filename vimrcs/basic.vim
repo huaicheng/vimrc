@@ -6,16 +6,11 @@
 "       https://github.com/huaicheng/vimrc
 "
 " Sections:
-"    -> General
-"    -> VIM user interface
+"    -> General settings
 "    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
 "    -> Visual mode related
-"    -> Moving around, tabs and buffers
 "    -> Status line
 "    -> Editing mappings
-"    -> vimgrep searching and cope displaying
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
@@ -24,17 +19,142 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
+" => General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+" Be smart when using tabs ;)
+set smarttab
+set tabstop=4        " tell vim how many spaces one tab counts for
+set expandtab        " in insert mode, tab will produce `tabstop` spaces
+set shiftwidth=4     " control how << and >> works
+set softtabstop=4
 
-let g:tex_conceal = ""
+" Enable syntax highlighting
+syntax on
+
+" Enable filetype plugins
+filetype off
+filetype plugin on
+filetype indent on
+
+" Don't hide format controlling characters
+set conceallevel=0
+
+"set ai "Auto indent
+set autoindent
+set cindent
+"set si                      "Smart indent, no compatible with `cindent`
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Set language
+set langmenu=en_US.UTF-8
+set helplang=en
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Highlight current line, must come after colorscheme
+set cursorline
+hi CursorLine term=bold cterm=bold ctermbg=Black
+
+" Line number & color
+set number
+hi LineNr ctermfg=Darkgrey " ctermbg=Black
+hi CursorLineNr term=bold cterm=bold ctermfg=Darkgrey
+
+" Set 80 line marker
+set textwidth=80
+" fo: t for auto line break after textwidth, a for auto adjust lines
+set formatoptions-=t
+set colorcolumn=80
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" Linebreak at `breakat` characters
+set lbr
+set wrap                    "Wrap lines
+
+" Set to auto read when a file is changed from the outside
+set autoread
 
 " Sets how many lines of history VIM has to remember
 set history=500
 
-" Add my own settings
+" Delete warning sound
+set vb t_vb=
+
+" Enable folding
+set foldenable 
+set foldcolumn=3
+set foldlevel=3
+set foldmethod=manual
+
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+" Turn on the wild menu, command autocompletion
+set wildmenu
+
+"Always show current line position
+set ruler
+
+" Height of the command bar
+set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+set hid
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch 
+
+" Don't redraw while executing macros (for performance)
+set lazyredraw 
+
+" use vim's keyboard model
+set nocompatible
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+
+" Show time of the match
+set matchtime=1
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" mutt settings
+au BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+
+" vim-tex, disable conceal
+let g:tex_conceal = ""
+
 
 " Remember last position when exited
 if has("autocmd")
@@ -70,9 +190,6 @@ function! LoadCscope()
 endfunction
 au BufEnter /* call LoadCscope()
 
-" Delete warning sound
-set vb t_vb=
-
 " Solve mutt's line-break problem (:help formatoptions)
 augroup mail_trailing_whitespace " {
     autocmd!
@@ -80,19 +197,11 @@ augroup mail_trailing_whitespace " {
 augroup END " }
 "setlocal fo+=aw
 
-" Enable folding
-set foldenable 
-set foldcolumn=3
-set foldlevel=3
-set foldmethod=manual
-
 " Use <space> to open/close the folds
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 map <F3> :tabnew .<CR>
 map <C-F3> \be
 
-" Set the C language autoindent
-set smartindent
 
 " Tagbar settings
 let g:tagbar_ctags_bin = 'ctags'
@@ -109,19 +218,19 @@ autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
 nmap <F8> :TagbarToggle<CR>
 
 " YCM settings
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_commments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_comp0letion = ['<c-p>', '<Up>']
-let g:ycm_complete_in_strings = 1
-let g:ycm_show_disgnostics_ui = 0
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
-nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_collect_identifiers_from_commments_and_strings = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+"let g:ycm_key_list_previous_comp0letion = ['<c-p>', '<Up>']
+"let g:ycm_complete_in_strings = 1
+"let g:ycm_show_disgnostics_ui = 0
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
+"nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 
-" tmux related settings
+" Tmux navigator plugin settings
 "let g:tmux_navigator_no_mappings = 1
 
 "nnoremap <silent> {c-h} :TmuxNavigateLeft<cr>
@@ -171,14 +280,6 @@ noremap <f2> =a{
 se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
 "autocmd BufEnter * lcd %:p:h
 
-" Enable filetype plugins
-filetype off
-filetype plugin on
-filetype indent on
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -191,15 +292,6 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
-
-" Turn on the wild menu
-set wildmenu
-
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -208,72 +300,9 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-"Always show current position
-set ruler
-
-" Height of the command bar
-set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch 
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
-" use vim's keyboard model
-set nocompatible
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch 
-
-" Show time of the match
-set matchtime=1
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-autocmd! GUIEnter * set vb t_vb=
-
-" Add a bit extra margin to the left
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax on
-
-" Remove error sound
-set noeb
 
 " Use solarized colorscheme
 "let g:solarized_termcolors=256
@@ -306,59 +335,6 @@ if has("gui_running")
     endif
 endif
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-set fileencodings=ucs-bom,utf-8,cp936,gbk,big5,latin1,euc-kr,euc-jp
-" Set language
-set langmenu=en_US.UTF-8
-set helplang=en
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-" Highlight current line, must come after colorscheme
-set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=Black
-
-" Line number & color
-set number
-hi LineNr ctermbg=Black ctermfg=Darkgrey
-hi CursorLineNr term=bold cterm=bold ctermfg=White
-
-" Set 80 line marker
-set textwidth=80
-" fo: t for auto line break after textwidth, a for auto adjust lines
-set formatoptions-=t
-set colorcolumn=80
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Be smart when using tabs ;)
-set smarttab
-set shiftwidth=4
-set tabstop=4
-
-" Linebreak on 500 characters
-set lbr
-
-"set ai "Auto indent
-set autoindent
-set cindent
-set si                      "Smart indent
-set wrap                    "Wrap lines
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -368,9 +344,6 @@ vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -391,7 +364,8 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>l :tabnext <cr>
+map <leader>h :tabprevious<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -425,8 +399,8 @@ set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
 set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-set statusline+=%8*\ %=\ LN:%04l/%L\ (%03p%%)\            "Rownumber/total (%)
-set statusline+=%9*\ COL:%03c\                            "Colnr
+set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\            "Rownumber/total (%)
+set statusline+=%9*\ COL:%3c\                            "Colnr
 
 hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
 hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
@@ -436,9 +410,6 @@ hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
 hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
 hi User8 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#5b7fbb
 hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
-
-" Don't hide format controlling characters
-set conceallevel=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -455,20 +426,6 @@ if has("mac") || has("macunix")
   vmap <D-j> <M-j>
   vmap <D-k> <M-k>
 endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ag after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open Ag and put the cursor in the right position
-map <leader>g :Ag 
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
@@ -507,10 +464,10 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
+map <leader>q :tabnew ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
+map <leader>x :tabnew ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
