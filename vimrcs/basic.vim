@@ -8,11 +8,10 @@
 " Sections:
 "    -> General settings
 "    -> Colors and Fonts
-"    -> Visual mode related
 "    -> Status line
-"    -> Editing mappings
-"    -> Spell checking
-"    -> Misc
+"    -> Plugin specfic settings
+"    -> Mapping settings
+"    -> Autocmds together
 "    -> Helper functions
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,6 +152,68 @@ set mat=2
 " Remember info about open buffers on close
 set viminfo^=%
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use solarized colorscheme
+"let g:solarized_termcolors=256
+try
+    set t_Co=256
+    syntax enable
+    set background=dark                             " mode: dark, light
+    colorscheme solarized
+catch
+endtry
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=m                               " hide menu bar
+    set guioptions-=r                               " hide scrollbar
+    set guioptions-=T                               " hide toolbar
+    set guioptions-=e
+
+    colorscheme desert
+    " set cursor color
+    highlight Cursor guifg=Black guibg=Green
+
+    if has("gui_gtk")                              " for GTK2 in Linux
+        set guifont=Monaco\ 12
+    elseif has("gui_macvim")                        " for MacVim
+        set guifont=Monaco:h14
+        set guitablabel=%M\ %t
+    elseif has("gui_win32")                         " for Windows
+        set guifont=Consolas:h11:cANSI
+    endif
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+set statusline=
+set statusline+=%7*\[%n]                                  "buffernr
+set statusline+=%1*\ %<%f\                                "File+path
+set statusline+=%2*\ %y\                                  "FileType
+set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\            "Rownumber/total (%)
+set statusline+=%9*\ COL:%3c\                            "Colnr
+
+hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
+hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
+hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
+hi User4 ctermbg=Green guifg=#112605  guibg=#aefe7B
+hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
+hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
+hi User8 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#5b7fbb
+hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin specific settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vim-tex, disable conceal
 let g:tex_conceal = ""
@@ -212,7 +273,6 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " Tmux navigator plugin settings
 "let g:tmux_navigator_no_mappings = 1
-
 "nnoremap <silent> {c-h} :TmuxNavigateLeft<cr>
 "nnoremap <silent> {c-j} :TmuxNavigateDown<cr>
 "nnoremap <silent> {c-k} :TmuxNavigateUp<cr>
@@ -229,44 +289,10 @@ let g:markdown_enable_conceal = 0
 " Tabular plugin settings
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
-" Cscope.out autoloading
-function! LoadCscope()
-    let db = findfile("cscope.out", ".;")
-    if (!empty(db))
-        let path = strpart(db, 0, match(db, "/cscope.out$"))
-        set nocscopeverbose             " suppress 'duplicate connection' error
-        exe "cs add " . db . " " . path
-        set cscopeverbose
-    endif
-endfunction
 
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-" Display .NFO files
-function! SetFileEncodings(encodings)
-    let b:myfileencodingsbak=&fileencodings
-    let &fileencodings=a:encodings
-endfunction
-
-function! RestoreFileEncodings()
-    let &fileencodings=b:myfileencodingsbak
-    unlet b:myfileencodingsbak
-endfunction
-
-"noremap <f2> =a{
-"colo desert
-"colo desert
-"se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
-"autocmd BufEnter * lcd %:p:h
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mapping settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -295,50 +321,10 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use solarized colorscheme
-"let g:solarized_termcolors=256
-try
-    set t_Co=256
-    syntax enable
-    set background=dark                             " mode: dark, light
-    colorscheme solarized
-catch
-endtry
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=m                               " hide menu bar
-    set guioptions-=r                               " hide scrollbar
-    set guioptions-=T                               " hide toolbar
-    set guioptions-=e
-
-    set t_Co=256
-    colorscheme desert
-    " set cursor color
-    highlight Cursor guifg=Black guibg=Green
-
-    if has("gui_gtk")                              " for GTK2 in Linux
-        set guifont=Monaco\ 12
-    elseif has("gui_macvim")                        " for MacVim
-        set guifont=Monaco:h14
-        set guitablabel=%M\ %t
-    elseif has("gui_win32")                         " for Windows
-        set guifont=Consolas:h11:cANSI
-    endif
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 "vnoremap <silent> * :call VisualSelection('f', '')<CR>
 "vnoremap <silent> # :call VisualSelection('b', '')<CR>
-
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -375,6 +361,18 @@ noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" Remove the Windows ^M - when the encodings gets messed up
+"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Quickly open a buffer for scribble
+noremap <leader>q :tabnew ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+noremap <leader>x :tabnew ~/buffer.md<cr>
+
+" Toggle paste mode on and off
+noremap <leader>pp :setlocal paste!<cr>
+
 " Specify the behavior when switching between buffers 
 try
   set switchbuf=useopen,usetab,newtab
@@ -382,34 +380,6 @@ try
 catch
 endtry
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-set statusline=
-set statusline+=%7*\[%n]                                  "buffernr
-set statusline+=%1*\ %<%f\                                "File+path
-set statusline+=%2*\ %y\                                  "FileType
-set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\            "Rownumber/total (%)
-set statusline+=%9*\ COL:%3c\                            "Colnr
-
-hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
-hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
-hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
-hi User4 ctermbg=Green guifg=#112605  guibg=#aefe7B
-hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
-hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
-hi User8 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#5b7fbb
-hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nnoremap <M-j> mz:m+<cr>`z
 nnoremap <M-k> mz:m-2<cr>`z
@@ -444,7 +414,7 @@ endif
 " => Spell checking
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
-noremap <leader>ss :setlocal spell!<cr>
+"noremap <leader>ss :setlocal spell!<cr>
 
 " Shortcuts using <leader>
 "noremap <leader>sn ]s
@@ -454,20 +424,8 @@ noremap <leader>ss :setlocal spell!<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
+" => Autocmds together
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-noremap <leader>q :tabnew ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-noremap <leader>x :tabnew ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-noremap <leader>pp :setlocal paste!<cr>
-
 augroup vimrc_autocmd
     autocmd!
     if has("autocmd")
@@ -493,6 +451,41 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Cscope.out autoloading
+function! LoadCscope()
+    let db = findfile("cscope.out", ".;")
+    if (!empty(db))
+        let path = strpart(db, 0, match(db, "/cscope.out$"))
+        set nocscopeverbose             " suppress 'duplicate connection' error
+        exe "cs add " . db . " " . path
+        set cscopeverbose
+    endif
+endfunction
+
+" For tabular
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
+" Display .NFO files
+function! SetFileEncodings(encodings)
+    let b:myfileencodingsbak=&fileencodings
+    let &fileencodings=a:encodings
+endfunction
+
+function! RestoreFileEncodings()
+    let &fileencodings=b:myfileencodingsbak
+    unlet b:myfileencodingsbak
+endfunction
+
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -519,7 +512,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
 
 " Returns true if paste mode is enabled
 function! HasPaste()
