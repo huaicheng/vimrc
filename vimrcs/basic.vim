@@ -36,8 +36,10 @@ set expandtab        " in insert mode, tab becomes `tabstop` spaces
 set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
 set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 
-" Enable syntax highlighting
-syntax on
+" Enable syntax highlighting, use `enable` instead of `on` to keep yr hi changes
+if !exists("g:syntax_on")
+    syntax enable
+endif
 
 " Enable filetype plugins
 filetype on
@@ -156,16 +158,6 @@ set viminfo^=%
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Use solarized colorscheme
-"let g:solarized_termcolors=256
-try
-    set t_Co=256
-    syntax enable
-    set background=dark                             " mode: dark, light
-    colorscheme solarized
-catch
-endtry
-
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=m                               " hide menu bar
@@ -177,14 +169,24 @@ if has("gui_running")
     " set cursor color
     highlight Cursor guifg=Black guibg=Green
 
-    if has("gui_gtk")                              " for GTK2 in Linux
-        set guifont=Monaco\ 12
+    if has("gui_gtk")                               " for GTK in Linux
+        set guifont=Monaco\ 12,Ubuntu\ Mono\ 12
     elseif has("gui_macvim")                        " for MacVim
         set guifont=Monaco:h14
         set guitablabel=%M\ %t
     elseif has("gui_win32")                         " for Windows
         set guifont=Consolas:h11:cANSI
     endif
+else
+    " Use tweaked solarized colorscheme in terminal mode
+    " Turn this on if your terminal emulator is not using solarized colorscheme
+    "let g:solarized_termcolors=256
+    try
+        set t_Co=256
+        set background=dark                             " mode: dark, light
+        colorscheme solarized
+    catch
+    endtry
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
