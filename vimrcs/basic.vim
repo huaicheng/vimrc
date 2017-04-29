@@ -22,6 +22,9 @@
 " => General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" use vim's keyboard model
+set nocompatible
+
 " Be smart when using tabs ;)
 set smarttab
 set tabstop=4        " tell vim how many spaces one tab counts for
@@ -33,7 +36,7 @@ set softtabstop=4
 syntax on
 
 " Enable filetype plugins
-filetype off
+filetype on
 filetype plugin on
 filetype indent on
 
@@ -134,9 +137,6 @@ set incsearch
 " Don't redraw while executing macros (for performance)
 set lazyredraw 
 
-" use vim's keyboard model
-set nocompatible
-
 " For regular expressions turn magic on
 set magic
 
@@ -154,7 +154,6 @@ au BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
 
 " vim-tex, disable conceal
 let g:tex_conceal = ""
-
 
 " Remember last position when exited
 if has("autocmd")
@@ -287,6 +286,11 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
+vnoremap Q gq
+nnoremap Q gqap
+" Move around using visual lines
+nnoremap j gj
+nnoremap k gk
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -322,6 +326,7 @@ if has("gui_running")
     set guioptions-=e
 
     set t_Co=256
+    colorscheme desert
     " set cursor color
     highlight Cursor guifg=Black guibg=Green
 
