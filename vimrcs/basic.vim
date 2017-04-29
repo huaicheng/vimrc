@@ -309,6 +309,9 @@ nnoremap j gj
 nnoremap k gk
 inoremap <c-u> <esc>viwUea
 
+" Remap ESC
+inoremap jj <esc>
+
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
