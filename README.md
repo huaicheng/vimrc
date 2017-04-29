@@ -44,8 +44,9 @@ To install it simply do following:
 	bash ~/.vim_runtime/install_basic_vimrc.sh
 
 TODO:
-* [ ] vim startup time tuning
-* [ ] remove unused settings
+* [x] vim startup time tuning (via augroup)
+* [ ] remove unused settings (ongoing)
 * [ ] beautify tab related stuff
+* [ ] refactor code
 
 Feedbacks are always welcome.
