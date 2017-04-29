@@ -150,18 +150,12 @@ set matchtime=1
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" mutt settings
-au BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+" Remember info about open buffers on close
+set viminfo^=%
+
 
 " vim-tex, disable conceal
 let g:tex_conceal = ""
-
-" Remember last position when exited
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-" Remember info about open buffers on close
-set viminfo^=%
 
 " Cscope settings, VIM should be compiled with "--enable-cscope"
 if has('cscope')
@@ -178,18 +172,6 @@ if has('cscope')
     cnoreabbrev csh cs help
 endif
 
-" Cscope.out autoloading
-function! LoadCscope()
-    let db = findfile("cscope.out", ".;")
-    if (!empty(db))
-        let path = strpart(db, 0, match(db, "/cscope.out$"))
-        set nocscopeverbose             " suppress 'duplicate connection' error
-        exe "cs add " . db . " " . path
-        set cscopeverbose
-    endif
-endfunction
-au BufEnter /* call LoadCscope()
-
 " Solve mutt's line-break problem (:help formatoptions)
 "augroup mail_trailing_whitespace " {
     "autocmd!
@@ -202,7 +184,6 @@ au BufEnter /* call LoadCscope()
 "map <F3> :tabnew .<CR>
 "map <C-F3> \be
 
-
 " Tagbar settings
 let g:tagbar_ctags_bin = 'ctags'
 let g:tagbar_left = 1
@@ -214,7 +195,6 @@ let g:tagbar_show_visibility = 0
 let g:tagbar_indent = 0
 "let g:tagbar_autofocus = 1
 " Open tagbar for certain types of files
-autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
 nnoremap <F8> :TagbarToggle<CR>
 
 " YCM settings
@@ -249,6 +229,17 @@ let g:markdown_enable_conceal = 0
 " Tabular plugin settings
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
+" Cscope.out autoloading
+function! LoadCscope()
+    let db = findfile("cscope.out", ".;")
+    if (!empty(db))
+        let path = strpart(db, 0, match(db, "/cscope.out$"))
+        set nocscopeverbose             " suppress 'duplicate connection' error
+        exe "cs add " . db . " " . path
+        set cscopeverbose
+    endif
+endfunction
+
 function! s:align()
   let p = '^\s*|\s.*\s|\s*$'
   if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
@@ -270,9 +261,6 @@ function! RestoreFileEncodings()
     let &fileencodings=b:myfileencodingsbak
     unlet b:myfileencodingsbak
 endfunction
-
-au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
-au BufReadPost *.nfo call RestoreFileEncodings()
 
 "noremap <f2> =a{
 "colo desert
@@ -376,9 +364,9 @@ noremap <leader>l :tabnext <cr>
 noremap <leader>h :tabprevious<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+"let g:lasttab = 1
+"nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
+"au TabLeave * let g:lasttab = tabpagenr()
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -479,6 +467,27 @@ noremap <leader>x :tabnew ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 noremap <leader>pp :setlocal paste!<cr>
+
+augroup vimrc_autocmd
+    autocmd!
+    if has("autocmd")
+        " Remember last position when exited
+        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    endif
+
+    " Open tagbar for certain filetypes
+    autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
+
+    " Mutt settings
+    autocmd BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+
+    " Auto search and load cscope.out
+    autocmd BufEnter /* call LoadCscope()
+
+    " Display .nfo file
+    autocmd BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
+    autocmd BufReadPost *.nfo call RestoreFileEncodings()
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
