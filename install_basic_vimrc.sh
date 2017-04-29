@@ -1,7 +1,9 @@
 #!/bin/bash
 
-[[ -e ~/.vim/bundle/Vundle.vim ]] || mkdir -p ~/.vim/bundle/Vundle.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+VundleDir=~/.vim/bundle/Vundle.vim
+
+[[ -e $VundleDir ]] || mkdir -p $VundleDir
+git clone https://github.com/VundleVim/Vundle.vim.git $VundleDir
 
 echo 'set runtimepath+=~/.vim_runtime
 
@@ -12,6 +14,8 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry' > ~/.vimrc
+
+# install plugins
 vim +PluginInstall +qall
 
 echo "Installed the Basic Vim configuration successfully! Enjoy :-)"
