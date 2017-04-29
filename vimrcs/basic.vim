@@ -25,12 +25,17 @@
 " use vim's keyboard model
 set nocompatible
 
+"Wrap lines, instead of only showing partial content
+set wrap
+" Linebreak at `breakat` characters
+set lbr
+
 " Be smart when using tabs ;)
 set smarttab
-set tabstop=4        " tell vim how many spaces one tab counts for
-set expandtab        " in insert mode, tab will produce `tabstop` spaces
-set shiftwidth=4     " control how << and >> works
-set softtabstop=4
+set tabstop=4        " normally, how many spaces a tab counts for
+set expandtab        " in insert mode, tab becomes `tabstop` spaces
+set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
+set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 
 " Enable syntax highlighting
 syntax on
@@ -78,10 +83,6 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set nobackup
 set nowb
 set noswapfile
-
-" Linebreak at `breakat` characters
-set lbr
-set wrap                    "Wrap lines
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -190,16 +191,16 @@ endfunction
 au BufEnter /* call LoadCscope()
 
 " Solve mutt's line-break problem (:help formatoptions)
-augroup mail_trailing_whitespace " {
-    autocmd!
-    autocmd FileType mail setlocal formatoptions+=w
-augroup END " }
+"augroup mail_trailing_whitespace " {
+    "autocmd!
+    "autocmd FileType mail setlocal formatoptions+=w
+"augroup END " }
 "setlocal fo+=aw
 
 " Use <space> to open/close the folds
-nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-map <F3> :tabnew .<CR>
-map <C-F3> \be
+"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+"map <F3> :tabnew .<CR>
+"map <C-F3> \be
 
 
 " Tagbar settings
@@ -214,7 +215,7 @@ let g:tagbar_indent = 0
 "let g:tagbar_autofocus = 1
 " Open tagbar for certain types of files
 autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " YCM settings
 "let g:ycm_collect_identifiers_from_tags_files = 1
@@ -273,10 +274,10 @@ endfunction
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
 
-noremap <f2> =a{
+"noremap <f2> =a{
 "colo desert
 "colo desert
-se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
+"se ru nu ar sw=4 ts=4 noswf et sta nowrap ww=<,>,[,] gfn="YaHei Consolas Hybrid":h12
 "autocmd BufEnter * lcd %:p:h
 
 " With a map leader it's possible to do extra key combinations
@@ -285,12 +286,14 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nnoremap <leader>w :w!<cr>
 vnoremap Q gq
 nnoremap Q gqap
+
 " Move around using visual lines
 nnoremap j gj
 nnoremap k gk
+inoremap <c-u> <esc>viwUea
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -345,44 +348,44 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
+"vnoremap <silent> * :call VisualSelection('f', '')<CR>
+"vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>
+noremap <leader>bd :Bclose<cr>
 
 " Close all the buffers
-map <leader>ba :bufdo bd<cr>
+noremap <leader>ba :bufdo bd<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>l :tabnext <cr>
-map <leader>h :tabprevious<cr>
+noremap <leader>tn :tabnew<cr>
+noremap <leader>to :tabonly<cr>
+noremap <leader>tc :tabclose<cr>
+noremap <leader>tm :tabmove 
+noremap <leader>l :tabnext <cr>
+noremap <leader>h :tabprevious<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nnoremap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+noremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
@@ -420,16 +423,16 @@ hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nnoremap <M-j> mz:m+<cr>`z
+nnoremap <M-k> mz:m-2<cr>`z
+vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
+  nnoremap <D-j> <M-j>
+  nnoremap <D-k> <M-k>
+  vnoremap <D-j> <M-j>
+  vnoremap <D-k> <M-k>
 endif
 
 " Do :help cope if you are unsure what cope is. It's super useful!
@@ -443,39 +446,39 @@ endif
 " To go to the previous search results do:
 "   <leader>p
 "
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+"noremap <leader>cc :botright cope<cr>
+"noremap <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+"noremap <leader>n :cn<cr>
+"noremap <leader>p :cp<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+noremap <leader>ss :setlocal spell!<cr>
 
 " Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+"noremap <leader>sn ]s
+"noremap <leader>sp [s
+"noremap <leader>sa zg
+"noremap <leader>s? z=
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :tabnew ~/buffer<cr>
+noremap <leader>q :tabnew ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :tabnew ~/buffer.md<cr>
+noremap <leader>x :tabnew ~/buffer.md<cr>
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+noremap <leader>pp :setlocal paste!<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -537,3 +540,4 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
