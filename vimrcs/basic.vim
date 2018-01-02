@@ -94,27 +94,27 @@ else
     try
         set t_Co=256
         set background=dark                             " mode: dark, light
-        "colorscheme solarized
-        colorscheme desert
+        colorscheme solarized
+        "colorscheme desert
     catch
     endtry
 endif
 
 " Highlight current line, must come after colorscheme
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=DarkGrey
+hi CursorLine term=bold cterm=bold ctermbg=Black
 
 " Line number & color
 set number
-hi LineNr ctermfg=Darkgray " ctermbg=Black
-hi CursorLineNr term=bold cterm=bold ctermfg=DarkGray
+hi LineNr ctermfg=Darkgrey " ctermbg=Black
+hi CursorLineNr term=bold cterm=bold ctermfg=DarkGrey
 
 " Set 80 line marker
 set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=80
-hi ColorColumn ctermbg=DarkGray guibg=DarkGray
+hi ColorColumn ctermbg=black guibg=lightgrey
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
