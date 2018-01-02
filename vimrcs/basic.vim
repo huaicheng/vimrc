@@ -64,21 +64,57 @@ set helplang=en
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=m                               " hide menu bar
+    set guioptions-=r                               " hide scrollbar
+    set guioptions-=T                               " hide toolbar
+    set guioptions-=e
+
+    colorscheme desert
+    " set cursor color
+    highlight Cursor guifg=Black guibg=Green
+
+    if has("gui_gtk")                               " for GTK in Linux
+        set guifont=Monaco\ 12,Ubuntu\ Mono\ 12
+    elseif has("gui_macvim")                        " for MacVim
+        set guifont=Monaco:h12
+        set guitablabel=%M\ %t
+    elseif has("gui_win32")                         " for Windows
+        set guifont=Consolas:h11:cANSI
+    endif
+else
+    " Use tweaked solarized colorscheme in terminal mode
+    " Turn this on if your terminal emulator is not using solarized colorscheme
+    "let g:solarized_termcolors=256
+    try
+        set t_Co=256
+        set background=dark                             " mode: dark, light
+        "colorscheme solarized
+        colorscheme desert
+    catch
+    endtry
+endif
+
 " Highlight current line, must come after colorscheme
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=Black
+hi CursorLine term=bold cterm=bold ctermbg=DarkGrey
 
 " Line number & color
 set number
-hi LineNr ctermfg=Darkgrey " ctermbg=Black
-hi CursorLineNr term=bold cterm=bold ctermfg=Darkgrey
+hi LineNr ctermfg=Darkgray " ctermbg=Black
+hi CursorLineNr term=bold cterm=bold ctermfg=DarkGray
 
 " Set 80 line marker
 set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=80
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+hi ColorColumn ctermbg=DarkGray guibg=DarkGray
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -153,41 +189,6 @@ set mat=2
 
 " Remember info about open buffers on close
 set viminfo^=%
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=m                               " hide menu bar
-    set guioptions-=r                               " hide scrollbar
-    set guioptions-=T                               " hide toolbar
-    set guioptions-=e
-
-    colorscheme desert
-    " set cursor color
-    highlight Cursor guifg=Black guibg=Green
-
-    if has("gui_gtk")                               " for GTK in Linux
-        set guifont=Monaco\ 12,Ubuntu\ Mono\ 12
-    elseif has("gui_macvim")                        " for MacVim
-        set guifont=Monaco:h14
-        set guitablabel=%M\ %t
-    elseif has("gui_win32")                         " for Windows
-        set guifont=Consolas:h11:cANSI
-    endif
-else
-    " Use tweaked solarized colorscheme in terminal mode
-    " Turn this on if your terminal emulator is not using solarized colorscheme
-    "let g:solarized_termcolors=256
-    try
-        set t_Co=256
-        set background=dark                             " mode: dark, light
-        colorscheme solarized
-    catch
-    endtry
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line
