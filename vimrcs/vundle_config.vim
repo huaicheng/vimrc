@@ -16,7 +16,7 @@ Plugin 'scrooloose/syntastic'
 "Plugin 'taglist.vim'
 Plugin 'majutsushi/tagbar'
 "Plugin 'mru.vim'                           " access to a list of recently opened files
-"Plugin 'DrawIt'
+Plugin 'DrawIt'
 "Plugin 'peaksea'
 "Plugin 'mattn/emmet-vim'                   " for html/css dev
 "Plugin 'bling/vim-airline'

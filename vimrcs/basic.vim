@@ -51,7 +51,7 @@ set conceallevel=0
 
 "set ai "Auto indent
 set autoindent
-set cindent
+"set cindent
 "set si                      "Smart indent, no compatible with `cindent`
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -219,6 +219,7 @@ hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
 
 " vim-tex, disable conceal
 let g:tex_conceal = ""
+let g:tex_flavor = "latex"
 
 " Cscope settings, VIM should be compiled with "--enable-cscope"
 if has('cscope')
@@ -440,6 +441,12 @@ augroup vimrc_autocmd
 
     " Open tagbar for certain filetypes
     autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
+
+    " Only use cindent for .c files
+    autocmd FileType c,cpp,cxx,h,hpp,py set cindent
+
+    " Use 75 chars/line for .tex files
+    autocmd FileType tex set tw=75 cc=75
 
     " Mutt settings
     autocmd BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
