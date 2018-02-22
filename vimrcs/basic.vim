@@ -31,10 +31,10 @@ set lbr
 
 " Be smart when using tabs ;)
 set smarttab
-set tabstop=4        " normally, how many spaces a tab counts for
-set expandtab        " in insert mode, tab becomes `tabstop` spaces
-set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
-set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
+set tabstop=8        " normally, how many spaces a tab counts for
+set noexpandtab        " in insert mode, tab becomes `tabstop` spaces
+set shiftwidth=8     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
+set softtabstop=8    " combine with `expadtab` to use spaces for <TAB>
 
 " Enable syntax highlighting, use `enable` instead of `on` to keep yr hi changes
 if !exists("g:syntax_on")
