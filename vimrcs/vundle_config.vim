@@ -34,6 +34,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'vivien/vim-linux-coding-style'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
