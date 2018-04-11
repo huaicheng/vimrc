@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Maintainer:
 "       Huaicheng Li <lhcwhu@gmail.com>
 " Note that this repo is forked from amix's vimrc, but has been changed greatly.
 "
@@ -36,6 +36,16 @@ set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
 set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 set expandtab        " in insert mode, tab becomes `tabstop` spaces
 
+" Shortcut to rapidly toggle `set list`
+"nmap <leader>h :set list!<CR>
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Invisible character colors
+hi NonText guifg=magenta
+hi SpecialKey guifg=magenta
+
+
 " Enable syntax highlighting, use `enable` instead of `on` to keep yr hi changes
 if !exists("g:syntax_on")
     syntax enable
@@ -64,6 +74,7 @@ set helplang=en
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,7 +88,7 @@ if has("gui_running")
 
     colorscheme desert
     " set cursor color
-    highlight Cursor guifg=Black guibg=Green
+    hi Cursor guifg=Black guibg=Green
 
     if has("gui_gtk")                               " for GTK in Linux
         set guifont=Monaco\ 12,Ubuntu\ Mono\ 12
@@ -116,6 +127,10 @@ set formatoptions-=t
 set colorcolumn=80
 hi ColorColumn ctermbg=black guibg=lightgrey
 
+" Highlight trailing spaces
+"hi ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
@@ -131,7 +146,7 @@ set history=500
 set vb t_vb=
 
 " Enable folding
-set foldenable 
+set foldenable
 set foldcolumn=3
 set foldlevel=3
 set foldmethod=manual
@@ -163,23 +178,23 @@ endif
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (for performance)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 
 " Show time of the match
 set matchtime=1
@@ -201,7 +216,7 @@ set statusline+=%1*\ %<%f\                                "File+path
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
 set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\            "Rownumber/total (%)
 set statusline+=%9*\ COL:%3c\                            "Colnr
 
@@ -225,7 +240,7 @@ let g:tex_flavor = "latex"
 " Cscope settings, VIM should be compiled with "--enable-cscope"
 if has('cscope')
     " use both cscope and ctags for 'ctrl-]', ':ta', and 'vim -t'
-    " set cscopetag 
+    " set cscopetag
     if has('quickfix')
         set cscopequickfix=s-,c-,d-,i-,t-,e-
     endif
@@ -290,6 +305,10 @@ let g:markdown_enable_input_abbreviations = 0
 let g:markdown_enable_conceal = 0
 "let g:markdown_mapping_switch_status = '<Leader>s'
 
+" vim-better-whitespace settings
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+
 " Tabular plugin settings
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
@@ -316,7 +335,7 @@ inoremap <c-u> <esc>viwUea
 " Remap ESC
 inoremap jj <esc>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
@@ -352,7 +371,7 @@ noremap <leader>ba :bufdo bd<cr>
 noremap <leader>tn :tabnew<cr>
 noremap <leader>to :tabonly<cr>
 noremap <leader>tc :tabclose<cr>
-noremap <leader>tm :tabmove 
+noremap <leader>tm :tabmove
 noremap <leader>l :tabnext <cr>
 noremap <leader>h :tabprevious<cr>
 
@@ -380,7 +399,7 @@ noremap <leader>x :tabnew ~/buffer.md<cr>
 " Toggle paste mode on and off
 noremap <leader>pp :setlocal paste!<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -441,7 +460,7 @@ augroup vimrc_autocmd
     endif
 
     " Open tagbar for certain filetypes
-    autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen 
+    autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
 
     " Only use cindent for .c files
     autocmd FileType c,cpp,cxx,h,hpp,py set cindent
@@ -503,7 +522,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
