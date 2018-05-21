@@ -233,6 +233,8 @@ hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
 " => Plugin specific settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:linuxsty_patterns = [ "/usr/src/", "/home/huaicheng/git/linux", "/home/huaicheng/git/oc-linux" ]
+
 " vim-tex, disable conceal
 let g:tex_conceal = ""
 let g:tex_flavor = "latex"
