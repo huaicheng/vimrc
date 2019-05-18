@@ -36,6 +36,8 @@ Plugin 'justinmk/vim-syntax-extra'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vivien/vim-linux-coding-style'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-scripts/scala.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
