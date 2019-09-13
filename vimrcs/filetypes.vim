@@ -6,9 +6,6 @@ au FileType python syn keyword pythonDecorator True None False self
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-au BufNewFile,BufRead *.plot,*.plt,*.gnuplot set ft=gnuplot
-au BufRead,BufNewFile *.scala set filetype=scala
-"au! Syntax scala source ~/.vim/bundle/vim-scala/syntax/scala.vim
 
 au FileType python map <buffer> F :set foldmethod=indent<cr>
 
@@ -22,38 +19,9 @@ au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
 
 
-""""""""""""""""""""""""""""""
-" => JavaScript section
-"""""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
 
-au FileType javascript imap <c-t> $log();<esc>hi
-au FileType javascript imap <c-a> alert();<esc>hi
+" HC: other settings ...
+au BufNewFile,BufRead *.plot,*.plt,*.gnuplot set ft=gnuplot
+au BufNewFile,BufRead *.scala set filetype=scala
 
-au FileType javascript inoremap <buffer> $r return
-au FileType javascript inoremap <buffer> $f //--- PH ----------------------------------------------<esc>FP2xi
-
-function! JavaScriptFold()
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-
-""""""""""""""""""""""""""""""
-" => CoffeeScript section
-"""""""""""""""""""""""""""""""
-function! CoffeeScriptFold()
-    setl foldmethod=indent
-    setl foldlevelstart=1
-endfunction
-au FileType coffee call CoffeeScriptFold()
-
-au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+au BufNewFile,BufRead *.tex set tw=72 cc=72
