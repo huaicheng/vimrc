@@ -310,6 +310,7 @@ let g:markdown_enable_conceal = 0
 " vim-better-whitespace settings
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+let g:current_line_whitespace_disabled_soft=1
 
 " Tabular plugin settings
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
