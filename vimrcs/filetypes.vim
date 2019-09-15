@@ -6,7 +6,6 @@ au FileType python syn keyword pythonDecorator True None False self
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-au BufNewFile,BufRead *.plt,*.plot,*.gnuplot setf gnuplot
 
 au FileType python map <buffer> F :set foldmethod=indent<cr>
 
@@ -22,7 +21,7 @@ au FileType python map <buffer> <leader>D ?def
 
 
 " HC: other settings ...
-au BufNewFile,BufRead *.plot,*.plt,*.gnuplot set ft=gnuplot
+au BufNewFile,BufRead *.plot,*.plt,*.gnuplot,*.gp set ft=gnuplot
 au BufNewFile,BufRead *.scala set filetype=scala
 
 au BufNewFile,BufRead *.tex set tw=72 cc=72
