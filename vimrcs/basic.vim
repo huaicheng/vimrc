@@ -308,6 +308,7 @@ let g:markdown_enable_conceal = 0
 "let g:markdown_mapping_switch_status = '<Leader>s'
 
 " vim-better-whitespace settings
+let g:strip_whitespace_confirm=0
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:current_line_whitespace_disabled_soft=1
