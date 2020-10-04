@@ -5,13 +5,13 @@
 [Contact Me](lhcwhu@gmail.com)
 
 *__Note__: This project is forked from [here](git@github.com:amix/vimrc.git),
-  but has been changed greatly*
+but has been changed greatly*
 
 ### Some basic settings I use ###
 
 * cscope: autoload cscope.out file, short keys
-* colorscheme: solarized, well, your terminal needs to use solarized color
-too to make vim look good; otherwise it's really UGLY
+* colorscheme: solarized, well, your terminal needs to use solarized color too
+  to make vim look good; otherwise it's really UGLY
 * 80 line marker, auto-wrap line, ruler ..
 * customized statusline w/o plugin
 
@@ -20,7 +20,7 @@ too to make vim look good; otherwise it's really UGLY
 * tagbar: ok, I have abandoned taglist ..
 * nerdtree: to be honest, I seldomly use it
 * YouCompleteMe & YCM-Generator: for this pair, you still have to compile and
-generate conf files for your projects manually
+  generate conf files for your projects manually
 * indentLine: organize code 
 * syntastic: grammer checking and more
 * DrawIt: draw ascii graphs
@@ -31,22 +31,34 @@ generate conf files for your projects manually
 
 There are two versions: [awesome]() and [basic]()
 
-## How to install the Awesome version?
+### How to install the Awesome version?
+
 To install it simply do following:
 
+```
 	git clone git://github.com/huaicheng/vimrc.git ~/.vim_runtime
 	bash ~/.vim_runtime/install_awesome_vimrc.sh
+```
 
 
-## How to install the Basic version?
+### How to install the Basic version?
 
+```
 	git clone git://github.com/huaicheng/vimrc.git ~/.vim_runtime
 	bash ~/.vim_runtime/install_basic_vimrc.sh
+```
 
-TODO:
+### Use with Urxvt on Gentoo ###
+
+- Install urxvt-unicode-9999 which has true color support (refer to $notes)
+- Use solarized colorscheme for urxvt as well
+
+### TODO:
+
 * [x] vim startup time tuning (via augroup)
 * [ ] remove unused settings (ongoing)
 * [ ] beautify tab related stuff
 * [ ] refactor code
 
 Feedbacks are always welcome.
+
