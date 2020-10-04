@@ -86,14 +86,15 @@ if has("gui_running")
     set guioptions-=T                               " hide toolbar
     set guioptions-=e
 
-    colorscheme desert
+    "colorscheme desert
+    colorscheme solarized
     " set cursor color
     hi Cursor guifg=Black guibg=Green
 
     if has("gui_gtk")                               " for GTK in Linux
-        set guifont=Monaco\ 12,Ubuntu\ Mono\ 12
+        set guifont=Monaco\ 10,Ubuntu\ Mono\ 10
     elseif has("gui_macvim")                        " for MacVim
-        set guifont=Monaco:h12
+        set guifont=Monaco:h10
         set guitablabel=%M\ %t
     elseif has("gui_win32")                         " for Windows
         set guifont=Consolas:h11:cANSI
@@ -105,8 +106,8 @@ else
     try
         set t_Co=256
         set background=dark                             " mode: dark, light
-        colorscheme solarized
-        "colorscheme desert
+        "colorscheme solarized
+        colorscheme desert
     catch
     endtry
 endif
