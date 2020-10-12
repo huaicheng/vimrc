@@ -28,9 +28,9 @@ Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels
 "Plugin 'Yggdroot/indentLine'
 "Plugin 'lervag/vimtex'
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 "Plugin 'altercation/solarized'
-Plugin 'lifepillar/vim-solarized8'
+"Plugin 'lifepillar/vim-solarized8'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'rdnetto/YCM-Generator'
 Plugin 'godlygeek/tabular'

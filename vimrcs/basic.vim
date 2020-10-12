@@ -128,7 +128,7 @@ set textwidth=80
 set formatoptions-=t
 set colorcolumn=80
 "hi ColorColumn ctermbg=black guibg=lightgrey
-hi ColorColumn ctermbg=232 guibg=lightgrey
+hi ColorColumn ctermbg=232 "guibg=DarkGray
 
 " Highlight trailing spaces
 "hi ExtraWhitespace ctermbg=red guibg=red
@@ -226,11 +226,11 @@ set statusline+=%9*\ COL:%3c\                            "Colnr
 hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
 hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
 hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
-hi User4 ctermbg=Green guifg=#112605  guibg=#aefe7B
+hi User4 ctermbg=Blue guifg=#112605  guibg=#aefe7B
 hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
 hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
-hi User8 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#5b7fbb
-hi User9 ctermfg=White ctermbg=Black guifg=#ffffff  guibg=#810085
+hi User8 ctermfg=White ctermbg=Green guifg=#ffffff guibg=#5b7fbb
+hi User9 ctermfg=White ctermbg=Cyan guifg=#ffffff guibg=#810085
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin specific settings
