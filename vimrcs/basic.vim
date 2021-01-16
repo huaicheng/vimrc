@@ -36,6 +36,9 @@ set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
 set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 set expandtab        " in insert mode, tab becomes `tabstop` spaces
 
+" disable indent for switch case
+set cinoptions+=:0
+
 " Shortcut to rapidly toggle `set list`
 "nmap <leader>h :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
