@@ -44,7 +44,7 @@ set cino+=(0
 " Shortcut to rapidly toggle `set list`
 "nmap <leader>h :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,eol:¬
 
 " Invisible character colors
 hi NonText guifg=magenta
