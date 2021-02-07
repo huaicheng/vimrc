@@ -119,8 +119,8 @@ endif
 
 " Highlight current line, must come after colorscheme
 set cursorline
-"hi CursorLine term=bold cterm=bold ctermbg=Black
-hi CursorLine term=bold cterm=bold ctermbg=236
+hi CursorLine term=bold cterm=bold ctermbg=Black
+"hi CursorLine term=bold cterm=bold ctermbg=236
 
 " Line number & color
 set number
@@ -132,8 +132,8 @@ set textwidth=80
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=80
-"hi ColorColumn ctermbg=black guibg=lightgrey
-hi ColorColumn ctermbg=232 "guibg=DarkGray
+hi ColorColumn ctermbg=black guibg=lightgrey
+"hi ColorColumn ctermbg=232 "guibg=DarkGray
 
 " Highlight trailing spaces
 "hi ExtraWhitespace ctermbg=red guibg=red
