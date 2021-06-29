@@ -21,10 +21,10 @@
 " => General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" use vim's keyboard model
+" Use vim's keyboard model
 set nocompatible
 
-"Wrap lines, instead of only showing partial content
+" Wrap lines, instead of only showing partial content
 set wrap
 " Linebreak at `breakat` characters
 set lbr
@@ -165,7 +165,7 @@ set so=7
 " Turn on the wild menu, command autocompletion
 set wildmenu
 
-"Always show current line position
+" Always show current line position
 set ruler
 
 " Height of the command bar
@@ -216,7 +216,7 @@ set viminfo^=%
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Always show the status line
+" Do not always show the status line
 set laststatus=1
 if has("gui_running")
     set laststatus=2
@@ -227,8 +227,8 @@ if has("gui_running")
     set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
     set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
     set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
-    set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\            "Rownumber/total (%)
-    set statusline+=%9*\ COL:%3c\                            "Colnr
+    set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\              "Rownumber/total (%)
+    set statusline+=%9*\ COL:%3c\                             "Colnr
 
     hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
     hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
