@@ -36,10 +36,14 @@ set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
 set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 set expandtab        " in insert mode, tab becomes `tabstop` spaces
 
+"set cinoptions=l1
+"set cinoptions=p0,t0,:4,=0
+"set cinwords=if,else,switch,case,for,while,do
+
 " Disable indent for switch case
-set cinoptions+=:0
+"set cinoptions+=:0
 " Align function arguments, for more, ``:help cinoptions-values``
-set cino+=(0
+"set cino+=(0
 
 " Shortcut to rapidly toggle `set list`
 "nmap <leader>h :set list!<CR>
@@ -111,8 +115,8 @@ else
     try
         set t_Co=256
         set background=dark                             " mode: dark, light
-        "colorscheme solarized
-        colorscheme desert
+        colorscheme solarized
+        "colorscheme desert
     catch
     endtry
 endif

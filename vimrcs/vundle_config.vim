@@ -40,7 +40,7 @@ Plugin 'vivien/vim-linux-coding-style'
 Plugin 'ntpeters/vim-better-whitespace'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'vim-scripts/scala.vim'
-Plugin 'lervag/vimtex'
+"Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
