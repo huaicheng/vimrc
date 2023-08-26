@@ -27,11 +27,10 @@ Plugin 'gabrielelana/vim-markdown'
 Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 "Plugin 'nathanaelkane/vim-indent-guides'    " visually displaying indent levels
 "Plugin 'Yggdroot/indentLine'
-"Plugin 'lervag/vimtex'
 Plugin 'altercation/vim-colors-solarized'
 "Plugin 'altercation/solarized'
 "Plugin 'lifepillar/vim-solarized8'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'valloric/youcompleteme'
 "Plugin 'rdnetto/YCM-Generator'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-syntax-extra'
@@ -40,7 +39,7 @@ Plugin 'vivien/vim-linux-coding-style'
 Plugin 'ntpeters/vim-better-whitespace'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'vim-scripts/scala.vim'
-"Plugin 'lervag/vimtex'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()

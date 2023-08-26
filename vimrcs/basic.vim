@@ -83,6 +83,8 @@ set helplang=en
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" Enable clipboard for vim in terminals
+set clipboard+=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -95,8 +97,8 @@ if has("gui_running")
     set guioptions-=T                               " hide toolbar
     set guioptions-=e
 
-    "colorscheme desert
-    colorscheme solarized
+    colorscheme desert
+    "colorscheme solarized
     " set cursor color
     hi Cursor guifg=Black guibg=Green
 
@@ -115,8 +117,8 @@ else
     try
         set t_Co=256
         set background=dark                             " mode: dark, light
-        colorscheme solarized
-        "colorscheme desert
+        "colorscheme solarized
+        colorscheme desert
     catch
     endtry
 endif
