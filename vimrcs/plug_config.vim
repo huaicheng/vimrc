@@ -33,7 +33,8 @@ Plug 'vim-scripts/cscope_macros.vim'                  " basic cscope settings & 
 Plug 'altercation/vim-colors-solarized'
 "Plug 'altercation/solarized'
 "Plug 'lifepillar/vim-solarized8'
-"Plug 'valloric/youcompleteme'
+Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'valloric/youcompleteme', { 'on': [] }
 "Plug 'rdnetto/YCM-Generator'
 Plug 'godlygeek/tabular'
 Plug 'justinmk/vim-syntax-extra'
@@ -50,7 +51,11 @@ Plug 'dracula/vim'
 Plug 'arcticicestudio/nord-vim'
 
 " All of your Plugins must be added before the following line
-
 call plug#end()
 
-filetype plugin indent on
+" Defer loading ultisnips and YouCompleteMe when entering insert mode
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
+                     \| autocmd! load_us_ycm
+augroup END
