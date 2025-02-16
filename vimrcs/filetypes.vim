@@ -20,8 +20,11 @@ au FileType python map <buffer> <leader>D ?def
 
 
 
-" HC: other settings ...
+" HCL: other settings ...
 au BufNewFile,BufRead *.plot,*.plt,*.gnuplot,*.gp set ft=gnuplot
 au BufNewFile,BufRead *.scala set filetype=scala
 
 au BufNewFile,BufRead *.tex set tw=72 cc=72
+
+" Tex files, default indent 2 spaces
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2 expandtab

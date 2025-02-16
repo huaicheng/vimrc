@@ -30,7 +30,7 @@ Plugin 'cscope_macros.vim'                  " basic cscope settings & mapping
 Plugin 'altercation/vim-colors-solarized'
 "Plugin 'altercation/solarized'
 "Plugin 'lifepillar/vim-solarized8'
-Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
 "Plugin 'rdnetto/YCM-Generator'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-syntax-extra'
@@ -40,6 +40,11 @@ Plugin 'ntpeters/vim-better-whitespace'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'vim-scripts/scala.vim'
 Plugin 'lervag/vimtex'
+Plugin 'github/copilot.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'joshdick/onedark.vim'
+Plugin 'dracula/vim'
+Plugin 'arcticicestudio/nord-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()

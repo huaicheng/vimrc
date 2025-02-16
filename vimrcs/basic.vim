@@ -97,8 +97,8 @@ if has("gui_running")
     set guioptions-=T                               " hide toolbar
     set guioptions-=e
 
-    colorscheme desert
-    "colorscheme solarized
+    "colorscheme desert
+    colorscheme solarized
     " set cursor color
     hi Cursor guifg=Black guibg=Green
 
@@ -117,8 +117,15 @@ else
     try
         set t_Co=256
         set background=dark                             " mode: dark, light
-        "colorscheme solarized
-        colorscheme desert
+        if (has("termguicolors"))
+            set termguicolors
+        endif
+        colorscheme solarized
+        let g:gruvbox_italic=1
+        colorscheme gruvbox
+        colorscheme dracula
+        colorscheme onedark
+        "colorscheme desert
     catch
     endtry
 endif
@@ -427,6 +434,10 @@ try
 catch
 endtry
 
+" HCL: gnuplot replot
+map , :!gnuplot %<CR>
+" :echo 'Current time is ' . strftime('%c')<CR>
+
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nnoremap <M-j> mz:m+<cr>`z
 nnoremap <M-k> mz:m-2<cr>`z
@@ -595,3 +606,6 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
+" Copilot settings
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
