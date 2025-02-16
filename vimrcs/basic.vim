@@ -115,15 +115,14 @@ else
     " Turn this on if your terminal emulator is not using solarized colorscheme
     "let g:solarized_termcolors=256
     try
-        set t_Co=256
-        set background=dark                             " mode: dark, light
+        set background=dark " mode: dark, light
         if (has("termguicolors"))
             set termguicolors
         endif
         colorscheme solarized
-        let g:gruvbox_italic=1
-        colorscheme gruvbox
-        colorscheme dracula
+        "colorscheme gruvbox
+        "let g:gruvbox_italic=1
+        "colorscheme dracula
         colorscheme onedark
         "colorscheme desert
     catch
@@ -230,28 +229,28 @@ set viminfo^=%
 " => Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Do not always show the status line
-set laststatus=1
-if has("gui_running")
-    set laststatus=2
-    set statusline=
-    set statusline+=%7*\[%n]                                  "buffernr
-    set statusline+=%1*\ %<%f\                                "File+path
-    set statusline+=%2*\ %y\                                  "FileType
-    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-    set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
-    set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\              "Rownumber/total (%)
-    set statusline+=%9*\ COL:%3c\                             "Colnr
+"set laststatus=1
+"if has("gui_running")
+"    set laststatus=2
+"    set statusline=
+"    set statusline+=%7*\[%n]                                  "buffernr
+"    set statusline+=%1*\ %<%f\                                "File+path
+"    set statusline+=%2*\ %y\                                  "FileType
+"    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+"    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+"    set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
+"    set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\              "Rownumber/total (%)
+"    set statusline+=%9*\ COL:%3c\                             "Colnr
 
-    hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
-    hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
-    hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
-    hi User4 ctermbg=Blue guifg=#112605  guibg=#aefe7B
-    hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
-    hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
-    hi User8 ctermfg=White ctermbg=Green guifg=#ffffff guibg=#5b7fbb
-    hi User9 ctermfg=White ctermbg=Cyan guifg=#ffffff guibg=#810085
-endif
+"    hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
+"    hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
+"    hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
+"    hi User4 ctermbg=Blue guifg=#112605  guibg=#aefe7B
+"    hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
+"    hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
+"    hi User8 ctermfg=White ctermbg=Green guifg=#ffffff guibg=#5b7fbb
+"    hi User9 ctermfg=White ctermbg=Cyan guifg=#ffffff guibg=#810085
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin specific settings

@@ -22,8 +22,9 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/DrawIt'
 "Plug 'vim-scripts/peaksea'
 "Plug 'mattn/emmet-vim'                   " for html/css dev
-"Plug 'bling/vim-airline'
-"Plug 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'                 " git wrapper, **TO LEARN**
 "Plug 'tpope/vim-markdown'                " use native vim markdown feature now
 Plug 'gabrielelana/vim-markdown'
 "Plug 'brookhong/cscope.vim'              " automatic cscope db management, autoupdate cscope.out, **TO LEARN**
@@ -49,6 +50,8 @@ Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
