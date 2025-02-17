@@ -96,60 +96,54 @@ if has("gui_running")
     set guioptions-=r                               " hide scrollbar
     set guioptions-=T                               " hide toolbar
     set guioptions-=e
-
-    "colorscheme desert
-    colorscheme solarized
-    " set cursor color
-    hi Cursor guifg=Black guibg=Green
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=l
+    set guioptions-=L
 
     if has("gui_gtk")                               " for GTK in Linux
         set guifont=Monaco\ 10,Ubuntu\ Mono\ 10
     elseif has("gui_macvim")                        " for MacVim
-        set guifont=Monaco:h10
-        set guitablabel=%M\ %t
+        set guifont=Monaco\ Nerd\ Font\ Mono:h12
+        "set guitablabel=%M\ %t
     elseif has("gui_win32")                         " for Windows
         set guifont=Consolas:h11:cANSI
     endif
-else
-    " Use tweaked solarized colorscheme in terminal mode
-    " Turn this on if your terminal emulator is not using solarized colorscheme
-    "let g:solarized_termcolors=256
-    try
-        set background=dark " mode: dark, light
-        if (has("termguicolors"))
-            set termguicolors
-        endif
-        colorscheme solarized " 1st choice
-        "colorscheme gruvbox " 2nd choice
-        "let g:gruvbox_italic=1
-        colorscheme onedark " 3rd choice
-        "colorscheme dracula
-        "colorscheme desert
-    catch
-    endtry
 endif
+
+" Use tweaked solarized colorscheme in terminal mode
+" Turn this on if your terminal emulator is not using solarized colorscheme
+"let g:solarized_termcolors=256
+set background=dark " mode: dark, light
+set termguicolors
+"colorscheme solarized " 1st choice
+"colorscheme gruvbox " 2nd choice
+"let g:gruvbox_italic=1
+colorscheme onedark " 3rd choice
+"colorscheme dracula
+"colorscheme desert
 
 " Highlight current line, must come after colorscheme
 set cursorline
-hi CursorLine term=bold cterm=bold ctermbg=Black
-"hi CursorLine term=bold cterm=bold ctermbg=236
 
 " Line number & color
 set number
-"hi LineNr ctermfg=Darkgrey " ctermbg=Black
-"hi CursorLineNr term=bold cterm=bold ctermfg=DarkGrey
 
 " Set 80 line marker
 set textwidth=80
+set cursorcolumn
 " fo: t for auto line break after textwidth, a for auto adjust lines
 set formatoptions-=t
 set colorcolumn=80
+set nofoldenable
+set foldcolumn=0
 "hi ColorColumn ctermbg=black guibg=lightgrey
 "hi ColorColumn ctermbg=232 "guibg=DarkGray
 
 " Highlight trailing spaces
 "hi ExtraWhitespace ctermbg=red guibg=red
 "match ExtraWhitespace /\s\+$/
+
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -204,8 +198,15 @@ set smartcase
 " Highlight search results
 set hlsearch
 
+
 " Makes search act like search in modern browsers
 set incsearch
+" Search highlight: Bright blue
+hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
+" Incremental search: High-contrast red
+hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
+" MatchParen: Distinct violet-blue
+hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
 
 " Don't redraw while executing macros (for performance)
 set lazyredraw
@@ -252,3 +253,41 @@ set viminfo^=%
 "    hi User9 ctermfg=White ctermbg=Cyan guifg=#ffffff guibg=#810085
 "endif
 
+
+" Function to adjust cursor highlight based on colorscheme
+function! AdjustCursorHighlight()
+    if !exists('g:colors_name') || g:colors_name == ''
+        let g:colors_name = expand('<amatch>') " Ensure it's always set
+    endif
+    set foldcolumn=0
+
+    if g:colors_name ==# 'solarized'
+        hi CursorLine ctermbg=235 guibg=#073642
+        hi CursorColumn ctermbg=235 guibg=#073642
+        hi ColorColumn ctermbg=234 guibg=#073642
+        hi CursorLineNr ctermbg=169 guibg=#D33682
+        hi FoldColumn guibg=NONE ctermbg=NONE
+        " Search highlight: Bright blue
+        hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
+        " Incremental search: High-contrast red
+        hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
+        " MatchParen: Distinct violet-blue
+        hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
+    elseif g:colors_name ==# 'onedark'
+        hi CursorLine   ctermbg=236 guibg=#2c323c
+        hi CursorColumn ctermbg=236 guibg=#2C323C
+        hi ColorColumn  ctermbg=236 guibg=#2C323C
+        hi LineNr ctermfg=240 guifg=#839496
+    endif
+endfunction
+
+" Manually define g:colors_name if it's missing
+if !exists('g:colors_name') || g:colors_name == ''
+    let g:colors_name = 'solarized'
+endif
+
+" Call the function AFTER setting colorscheme
+call AdjustCursorHighlight()
+
+" Ensure it runs automatically when changing colorschemes
+autocmd ColorScheme * let g:colors_name = expand('<amatch>') | call AdjustCursorHighlight()

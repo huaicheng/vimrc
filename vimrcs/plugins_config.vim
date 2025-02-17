@@ -8,7 +8,7 @@
 " => Plugin specific settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:linuxsty_patterns = [ "/usr/src/", "~/git/linux" ]
+"let g:linuxsty_patterns = [ "/usr/src/", "~/git/linux" ]
 
 " vim-tex, disable conceal
 let g:tex_conceal = ""
