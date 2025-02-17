@@ -116,10 +116,10 @@ endif
 "let g:solarized_termcolors=256
 set background=dark " mode: dark, light
 set termguicolors
-"colorscheme solarized " 1st choice
+colorscheme solarized " 1st choice
 "colorscheme gruvbox " 2nd choice
 "let g:gruvbox_italic=1
-colorscheme onedark " 3rd choice
+"colorscheme onedark " 3rd choice
 "colorscheme dracula
 "colorscheme desert
 
