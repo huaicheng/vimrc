@@ -14,9 +14,9 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'junegunn/vim-plug'
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'kien/ctrlp.vim'                    " Fuzzy file, buffer, mru, tag, etc
-Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/taglist.vim', { 'on': 'Tlist' }
 Plug 'majutsushi/tagbar'
 "Plugin 'mru.vim'                           " access to a list of recently opened files
 Plug 'vim-scripts/DrawIt'
@@ -50,7 +50,7 @@ Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim'
 Plug 'arcticicestudio/nord-vim'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot', { 'for': ['c', 'cpp', 'html', 'css'] }
 Plug 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line

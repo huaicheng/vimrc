@@ -207,6 +207,10 @@ hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
 hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
 " MatchParen: Distinct violet-blue
 hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
+" Visual selection: Foreground (blackish) with light blue background
+hi Visual ctermfg=0 ctermbg=166 guifg=#FDF6E3 guibg=#CB4B16 gui=bold
+"hi LineNr ctermfg=240 guifg=#839496
+hi LineNr ctermfg=240 guifg=#586E75
 
 " Don't redraw while executing macros (for performance)
 set lazyredraw
@@ -260,12 +264,15 @@ function! AdjustCursorHighlight()
         let g:colors_name = expand('<amatch>') " Ensure it's always set
     endif
     set foldcolumn=0
+    "hi LineNr ctermfg=240 guifg=#839496
+    hi LineNr ctermfg=240 guifg=#586E75
 
     if g:colors_name ==# 'solarized'
         hi CursorLine ctermbg=235 guibg=#073642
         hi CursorColumn ctermbg=235 guibg=#073642
         hi ColorColumn ctermbg=234 guibg=#073642
         hi CursorLineNr ctermbg=169 guibg=#D33682
+        "hi CursorLineNr ctermfg=169 guifg=#D33682
         hi FoldColumn guibg=NONE ctermbg=NONE
         " Search highlight: Bright blue
         hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
@@ -273,6 +280,8 @@ function! AdjustCursorHighlight()
         hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
         " MatchParen: Distinct violet-blue
         hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
+        " Visual selection: Foreground (blackish) with light blue background
+        hi Visual ctermfg=0 ctermbg=166 guifg=#FDF6E3 guibg=#CB4B16 gui=bold
     elseif g:colors_name ==# 'onedark'
         hi CursorLine   ctermbg=236 guibg=#2c323c
         hi CursorColumn ctermbg=236 guibg=#2C323C
