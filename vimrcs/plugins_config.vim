@@ -11,8 +11,8 @@
 "let g:linuxsty_patterns = [ "/usr/src/", "~/git/linux" ]
 
 " vim-tex, disable conceal
-let g:tex_conceal = ""
-let g:tex_flavor = "latex"
+"let g:tex_conceal = ""
+"let g:tex_flavor = "latex"
 
 " Solve mutt's line-break problem (:help formatoptions)
 "augroup mail_trailing_whitespace " {
@@ -27,17 +27,17 @@ let g:tex_flavor = "latex"
 "map <C-F3> \be
 
 " Tagbar settings
-let g:tagbar_ctags_bin = 'ctags'
-let g:tagbar_left = 1
-let g:tagbar_width = 15
+"let g:tagbar_ctags_bin = 'ctags'
+"let g:tagbar_left = 1
+"let g:tagbar_width = 15
 "let g:tagbar_autoclose=1
-let g:tagbar_show_linenumbers = 0
-let g:tagbar_compact = 1
-let g:tagbar_show_visibility = 0
-let g:tagbar_indent = 0
+"let g:tagbar_show_linenumbers = 0
+"let g:tagbar_compact = 1
+"let g:tagbar_show_visibility = 0
+"let g:tagbar_indent = 0
 "let g:tagbar_autofocus = 1
 " Open tagbar for certain types of files
-nnoremap <F8> :TagbarToggle<CR>
+"nnoremap <F8> :TagbarToggle<CR>
 
 " YCM settings
 "let g:ycm_collect_identifiers_from_tags_files = 1
@@ -61,30 +61,26 @@ nnoremap <F8> :TagbarToggle<CR>
 "nnoremap <silent> {c-?} :TmuxNavigatePrevious<cr
 
 " Markdown plugin settings
-let g:markdown_enable_spell_checking = 0
-let g:markdown_enable_input_abbreviations = 0
+"let g:markdown_enable_spell_checking = 0
+"let g:markdown_enable_input_abbreviations = 0
 " disable concealing for italic, bold, inline-code and link
-let g:markdown_enable_conceal = 0
+"let g:markdown_enable_conceal = 0
 "let g:markdown_mapping_switch_status = '<Leader>s'
 
 " vim-better-whitespace settings
-let g:strip_whitespace_confirm=0
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
-let g:current_line_whitespace_disabled_soft=1
+"let g:strip_whitespace_confirm=0
+"let g:better_whitespace_enabled=1
+"let g:strip_whitespace_on_save=1
+"let g:current_line_whitespace_disabled_soft=1
 
 " Tabular plugin settings
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+"inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mapping settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -99,31 +95,12 @@ inoremap <c-u> <esc>viwUea
 " Remap ESC
 inoremap jj <esc>
 
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
-command! W w !sudo tee % > /dev/null
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
 
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 "vnoremap <silent> * :call VisualSelection('f', '')<CR>
 "vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
 
 " Close the current buffer
 noremap <leader>bd :Bclose<cr>
@@ -171,13 +148,13 @@ catch
 endtry
 
 " HCL: gnuplot replot
-map , :!gnuplot %<CR>
+"map , :!gnuplot %<CR>
 " :echo 'Current time is ' . strftime('%c')<CR>
 
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nnoremap <M-j> mz:m+<cr>`z
-nnoremap <M-k> mz:m-2<cr>`z
-vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+"nnoremap <M-j> mz:m+<cr>`z
+"nnoremap <M-k> mz:m-2<cr>`z
+"vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
@@ -216,52 +193,9 @@ endif
 "noremap <leader>sa zg
 "noremap <leader>s? z=
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Autocmds together
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup vimrc_autocmd
-    autocmd!
-    if has("autocmd")
-        " Remember last position when exited
-        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-    endif
-
-    " Open tagbar for certain filetypes
-    autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
-
-    " Only use cindent for .c files
-    autocmd FileType c,cpp,cxx,h,hpp,py set cindent
-
-    " Use 75 chars/line for .tex files
-    autocmd FileType tex set tw=75 cc=75
-
-    " Mutt settings
-    autocmd BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
-
-    " Auto search and load cscope.out
-    autocmd BufEnter /* call LoadCscope()
-
-    " Display .nfo file
-    autocmd BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
-    autocmd BufReadPost *.nfo call RestoreFileEncodings()
-augroup END
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Cscope.out autoloading
-function! LoadCscope()
-    let db = findfile("cscope.out", ".;")
-    if (!empty(db))
-        let path = strpart(db, 0, match(db, "/cscope.out$"))
-        set nocscopeverbose             " suppress 'duplicate connection' error
-        exe "cs add " . db . " " . path
-        set cscopeverbose
-    endif
-endfunction
 
 " For tabular
 function! s:align()
@@ -341,10 +275,6 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
-" Copilot settings
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 
 
 
@@ -447,11 +377,6 @@ vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-airline config (force color)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="luna" " alternatives: papercolor,
-let g:airline_powerline_fonts = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimroom

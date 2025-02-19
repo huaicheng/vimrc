@@ -235,3 +235,82 @@ if has('cscope')
     cnoreabbrev css cs show
     cnoreabbrev csh cs help
 endif
+
+" Cscope.out autoloading
+function! LoadCscope()
+    let db = findfile("cscope.out", ".;")
+    if (!empty(db))
+        let path = strpart(db, 0, match(db, "/cscope.out$"))
+        set nocscopeverbose             " suppress 'duplicate connection' error
+        exe "cs add " . db . " " . path
+        set cscopeverbose
+    endif
+endfunction
+
+
+augroup vimrc_autocmd
+    autocmd!
+    if has("autocmd")
+        " Remember last position when exited
+        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    endif
+
+    " Open tagbar for certain filetypes
+    "autocmd FileType c,cpp,cxx,h,hpp,py nested :TagbarOpen
+
+    " Only use cindent for .c files
+    "autocmd FileType c,cpp,cxx,h,hpp,py set cindent
+
+    " Use 75 chars/line for .tex files
+    autocmd FileType tex set tw=75 cc=75
+
+    " Mutt settings
+    autocmd BufRead /home/huaicheng/.mutt/tmp/mutt-* set tw=72
+
+    " Auto search and load cscope.out
+    autocmd BufEnter /* call LoadCscope()
+
+    " Display .nfo file
+    autocmd BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
+    autocmd BufReadPost *.nfo call RestoreFileEncodings()
+augroup END
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-airline config (force color)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_theme="luna" " alternatives: papercolor,
+let g:airline_powerline_fonts = 1
+
+" With a map leader it's possible to do extra key combinations like <leader>w
+" saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Use 8 spaces to comply with kernel coding style
+autocmd BufRead,BufNewFile * if findfile(".clang-format", ".;") != "" | setlocal tabstop=8 shiftwidth=8 noexpandtab | endif
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W w !sudo tee % > /dev/null
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+else
+    set wildignore+=.git\*,.hg\*,.svn\*
+endif
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move between windows
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+
+" Copilot settings
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
