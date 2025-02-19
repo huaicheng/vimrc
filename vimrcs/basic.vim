@@ -1,9 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
-"       Huaicheng Li <lhcwhu@gmail.com>
-" Note that this repo is forked from amix's vimrc, but has been changed greatly.
-"
 "       https://github.com/huaicheng/vimrc
+"       Huaicheng Li <lhcwhu@gmail.com>
 "
 " Sections:
 "    -> General settings
@@ -35,10 +33,8 @@ set tabstop=4        " normally, how many spaces a tab counts for
 set shiftwidth=4     " # of spaces to use for autoindent, `cindent`, >>, <<, etc
 set softtabstop=4    " combine with `expadtab` to use spaces for <TAB>
 set expandtab        " in insert mode, tab becomes `tabstop` spaces
-
-"set cinoptions=l1
-"set cinoptions=p0,t0,:4,=0
-"set cinwords=if,else,switch,case,for,while,do
+set modeline
+set modelines=5   " Check first and last 5 lines for modelines
 
 " Disable indent for switch case
 "set cinoptions+=:0
@@ -46,7 +42,7 @@ set expandtab        " in insert mode, tab becomes `tabstop` spaces
 "set cino+=(0
 
 " Shortcut to rapidly toggle `set list`
-"nmap <leader>h :set list!<CR>
+"nmap <leader>' :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 "set listchars=tab:▸\ ,eol:¬
 
@@ -56,9 +52,7 @@ hi SpecialKey guifg=magenta
 
 
 " Enable syntax highlighting, use `enable` instead of `on` to keep yr hi changes
-if !exists("g:syntax_on")
-    syntax enable
-endif
+syntax enable
 
 " Enable filetype plugins
 filetype on
@@ -92,14 +86,14 @@ set clipboard+=unnamed
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=m                               " hide menu bar
-    set guioptions-=r                               " hide scrollbar
-    set guioptions-=T                               " hide toolbar
-    set guioptions-=e
-    set guioptions-=r
-    set guioptions-=R
-    set guioptions-=l
-    set guioptions-=L
+    "set guioptions-=m                               " hide menu bar
+    "set guioptions-=r                               " hide scrollbar
+    "set guioptions-=T                               " hide toolbar
+    "set guioptions-=e
+    "set guioptions-=r
+    "set guioptions-=R
+    "set guioptions-=l
+    "set guioptions-=L
 
     if has("gui_gtk")                               " for GTK in Linux
         set guifont=Monaco\ 10,Ubuntu\ Mono\ 10
@@ -111,12 +105,9 @@ if has("gui_running")
     endif
 endif
 
-" Use tweaked solarized colorscheme in terminal mode
-" Turn this on if your terminal emulator is not using solarized colorscheme
-"let g:solarized_termcolors=256
 set background=dark " mode: dark, light
 set termguicolors
-colorscheme solarized " 1st choice
+colorscheme solarized8
 "colorscheme gruvbox " 2nd choice
 "let g:gruvbox_italic=1
 "colorscheme onedark " 3rd choice
@@ -202,15 +193,15 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 " Search highlight: Bright blue
-hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
+"hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
 " Incremental search: High-contrast red
-hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
+"hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
 " MatchParen: Distinct violet-blue
-hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
+"hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
 " Visual selection: Foreground (blackish) with light blue background
-hi Visual ctermfg=0 ctermbg=166 guifg=#FDF6E3 guibg=#CB4B16 gui=bold
+"hi Visual ctermfg=0 ctermbg=166 guifg=#FDF6E3 guibg=#CB4B16 gui=bold
 "hi LineNr ctermfg=240 guifg=#839496
-hi LineNr ctermfg=240 guifg=#586E75
+"hi LineNr ctermfg=240 guifg=#586E75
 
 " Don't redraw while executing macros (for performance)
 set lazyredraw
@@ -230,73 +221,17 @@ set mat=2
 " Remember info about open buffers on close
 set viminfo^=%
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Do not always show the status line
-"set laststatus=1
-"if has("gui_running")
-"    set laststatus=2
-"    set statusline=
-"    set statusline+=%7*\[%n]                                  "buffernr
-"    set statusline+=%1*\ %<%f\                                "File+path
-"    set statusline+=%2*\ %y\                                  "FileType
-"    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-"    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"    set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
-"    set statusline+=%8*\ %=\ LN:%l/%L\ (%03p%%)\              "Rownumber/total (%)
-"    set statusline+=%9*\ COL:%3c\                             "Colnr
-
-"    hi User1 ctermbg=Magenta guifg=#ffdad8  guibg=#880c0e
-"    hi User2 ctermbg=DarkYellow guifg=#000000  guibg=#F4905C
-"    hi User3 ctermbg=LightYellow guifg=#292b00  guibg=#f4f597
-"    hi User4 ctermbg=Blue guifg=#112605  guibg=#aefe7B
-"    hi User5 ctermbg=Green guifg=#051d00  guibg=#7dcc7d
-"    hi User7 ctermfg=White ctermbg=Magenta cterm=bold guifg=#ffffff  guibg=#880c0e gui=bold
-"    hi User8 ctermfg=White ctermbg=Green guifg=#ffffff guibg=#5b7fbb
-"    hi User9 ctermfg=White ctermbg=Cyan guifg=#ffffff guibg=#810085
-"endif
-
-
-" Function to adjust cursor highlight based on colorscheme
-function! AdjustCursorHighlight()
-    if !exists('g:colors_name') || g:colors_name == ''
-        let g:colors_name = expand('<amatch>') " Ensure it's always set
+" Cscope settings, VIM should be compiled with "--enable-cscope"
+if has('cscope')
+    " use both cscope and ctags for 'ctrl-]', ':ta', and 'vim -t'
+    " set cscopetag
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
     endif
-    set foldcolumn=0
-    "hi LineNr ctermfg=240 guifg=#839496
-    hi LineNr ctermfg=240 guifg=#586E75
-
-    if g:colors_name ==# 'solarized'
-        hi CursorLine ctermbg=235 guibg=#073642
-        hi CursorColumn ctermbg=235 guibg=#073642
-        hi ColorColumn ctermbg=234 guibg=#073642
-        hi CursorLineNr ctermbg=169 guibg=#D33682
-        "hi CursorLineNr ctermfg=169 guifg=#D33682
-        hi FoldColumn guibg=NONE ctermbg=NONE
-        " Search highlight: Bright blue
-        hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
-        " Incremental search: High-contrast red
-        hi IncSearch ctermfg=0 ctermbg=160 cterm=bold guifg=#002B36 guibg=#DC322F gui=bold
-        " MatchParen: Distinct violet-blue
-        hi MatchParen ctermfg=231 ctermbg=61 cterm=bold guifg=#FFFFFF guibg=#6C71C4 gui=bold
-        " Visual selection: Foreground (blackish) with light blue background
-        hi Visual ctermfg=0 ctermbg=166 guifg=#FDF6E3 guibg=#CB4B16 gui=bold
-    elseif g:colors_name ==# 'onedark'
-        hi CursorLine   ctermbg=236 guibg=#2c323c
-        hi CursorColumn ctermbg=236 guibg=#2C323C
-        hi ColorColumn  ctermbg=236 guibg=#2C323C
-        hi LineNr ctermfg=240 guifg=#839496
-    endif
-endfunction
-
-" Manually define g:colors_name if it's missing
-if !exists('g:colors_name') || g:colors_name == ''
-    let g:colors_name = 'solarized'
+    cnoreabbrev csa cs add
+    cnoreabbrev csf cs find
+    cnoreabbrev csk cs kill
+    cnoreabbrev csr cs reset
+    cnoreabbrev css cs show
+    cnoreabbrev csh cs help
 endif
-
-" Call the function AFTER setting colorscheme
-call AdjustCursorHighlight()
-
-" Ensure it runs automatically when changing colorschemes
-autocmd ColorScheme * let g:colors_name = expand('<amatch>') | call AdjustCursorHighlight()

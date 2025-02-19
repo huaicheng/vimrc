@@ -14,21 +14,6 @@
 let g:tex_conceal = ""
 let g:tex_flavor = "latex"
 
-" Cscope settings, VIM should be compiled with "--enable-cscope"
-if has('cscope')
-    " use both cscope and ctags for 'ctrl-]', ':ta', and 'vim -t'
-    " set cscopetag
-    if has('quickfix')
-        set cscopequickfix=s-,c-,d-,i-,t-,e-
-    endif
-    cnoreabbrev csa cs add
-    cnoreabbrev csf cs find
-    cnoreabbrev csk cs kill
-    cnoreabbrev csr cs reset
-    cnoreabbrev css cs show
-    cnoreabbrev csh cs help
-endif
-
 " Solve mutt's line-break problem (:help formatoptions)
 "augroup mail_trailing_whitespace " {
     "autocmd!
@@ -498,3 +483,6 @@ nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+" Use 8 spaces to comply with kernel coding style
+autocmd BufRead,BufNewFile * if findfile(".clang-format", ".;") != "" | setlocal tabstop=8 shiftwidth=8 noexpandtab | endif
