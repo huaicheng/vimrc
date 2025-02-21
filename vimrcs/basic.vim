@@ -311,6 +311,20 @@ noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
+nnoremap <leader>w :w!<cr>
+vnoremap Q gq
+nnoremap Q gqap
+nnoremap j gj
+nnoremap k gk
+inoremap <c-u> <esc>viwUea
+
+" Remap ESC
+" inoremap jj <esc>
+
 " Copilot settings
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+if has('filetype')
+    filetype indent plugin on "allow auto-indenting depending on file type
+endif
