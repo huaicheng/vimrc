@@ -189,9 +189,9 @@ set smartcase
 " Highlight search results
 set hlsearch
 
-
 " Makes search act like search in modern browsers
 set incsearch
+
 " Search highlight: Bright blue
 "hi Search ctermfg=0 ctermbg=32 cterm=bold guifg=#002B36 guibg=#268BD2 gui=bold
 " Incremental search: High-contrast red
@@ -328,3 +328,7 @@ let g:copilot_no_tab_map = v:true
 if has('filetype')
     filetype indent plugin on "allow auto-indenting depending on file type
 endif
+
+autocmd BufWritePre <buffer> :%s/\s\+$//e
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
