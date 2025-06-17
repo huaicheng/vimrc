@@ -329,6 +329,20 @@ if has('filetype')
     filetype indent plugin on "allow auto-indenting depending on file type
 endif
 
-autocmd BufWritePre <buffer> :%s/\s\+$//e
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+"autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd BufWritePre * silent! %s/\s\+$//e
+"autocmd FileType text setlocal nosmartindent nocindent indentexpr=
+"autocmd FileType tex setlocal indentexpr= nocindent nosmartindent noautoindent shiftwidth=0 softtabstop=0 formatoptions-=c formatoptions-=r formatoptions-=o
+"nnoremap <leader>gq :set indentexpr= nocindent nosmartindent noautoindent<CR>:set formatoptions-=cro<CR>gq
+autocmd FileType tex setlocal indentexpr=
+autocmd FileType tex setlocal nocindent nosmartindent noautoindent
+
+nnoremap <leader>g :!p %<CR>
+nnoremap <leader>m :!make <CR>
+au BufRead,BufNewFile *.plot set filetype=gnuplot
+iabbrev %% %==========================================================================
+" Save file with Ctrl+S in normal and insert mode
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
